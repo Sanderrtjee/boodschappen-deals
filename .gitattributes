@@ -1,0 +1,8 @@
+# Regeleindes vastzetten. Een run.sh met CRLF laat de add-on-container falen op
+# de shebang met een onduidelijke "no such file or directory", omdat de \r bij
+# de interpreter-naam hoort. Deze regels gelden ook als iemand met een andere
+# core.autocrlf-instelling kloont.
+* text=auto eol=lf
+*.sh text eol=lf
+*.yaml text eol=lf
+*.png binary
