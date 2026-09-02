@@ -67,7 +67,10 @@ function demoRijen() {
   return rijen.map((r, i) => {
     const [winkel, naam, categorie, eenheid, deal_type, prijs_nu, prijs_was, kortingsfactor, prijs_per_stuk, label] = r;
     return {
-      product_id: 900000 + i,
+      // Bewust een string, want zo levert pg een bigint aan. Met getallen hier
+      // testte de demodata een situatie die in het echt niet voorkomt, en bleef
+      // een vergelijkingsfout op product_id onzichtbaar.
+      product_id: String(900000 + i),
       winkel,
       externe_id: 'demo-' + i,
       naam,

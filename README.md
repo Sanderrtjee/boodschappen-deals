@@ -364,7 +364,7 @@ Buiten Home Assistant zijn s6 en bashio overbodig, dus compose gebruikt
 | Balk **deze aanbiedingen zijn niet vers** | De laatste scrape is ouder dan acht dagen. Kijk of de n8n-flow nog loopt. |
 | Site werkt, maar geen assistent-profielen | De koppeling vanuit n8n ontbreekt of het token klopt niet. Zie [KOPPELEN.md](KOPPELEN.md). |
 | n8n geeft `401 Ongeldig of ontbrekend token` | Header mist `Bearer `, of de add-on is na het instellen van het token niet herstart. |
-| Selectie is leeg terwijl het profiel bestaat | De gekozen producten staan niet meer in de laatste scrape. De site meldt dat zelf. |
+| Selectie is leeg terwijl het profiel bestaat | De gekozen producten staan niet meer in de laatste scrape. De site meldt dat zelf. Zag je dit met versie 1.2.3 of eerder, dan was het een bug: `product_id` komt als string uit Postgres en werd strikt vergeleken met een getal, dus matchte nooit. |
 | Build faalt op `npm: not found` | De Supervisor gebruikt een ander basisimage dan je denkt. Kijk in het buildlog naar `load metadata for ...`. |
 | Build faalt op `temporary error (try again later)` | De buildcontainer kan geen DNS. Deze add-on heeft dat niet meer nodig, maar andere lokaal gebouwde add-ons wel. Reproduceren: `printf 'FROM ghcr.io/home-assistant/amd64-base:3.21\nRUN cat /etc/resolv.conf && nslookup dl-cdn.alpinelinux.org\n' > /tmp/dns.Dockerfile && docker build --no-cache -f /tmp/dns.Dockerfile /tmp` |
 | Ik heb gepusht maar er verandert niets | `version` in `config.yaml` niet omhoog gezet, of de nestmap uit route A stap 2, of de container is niet herbouwd. |
@@ -449,7 +449,10 @@ printf 'DB_HOST=192.168.1.20\nDB_PASSWORD=geheim\n' > .env && docker compose up 
 
 De demodata in `lib/demo.js` volgt bewust exact de kolomsemantiek van de echte
 parsers, inclusief de rare gevallen: `2e gratis` als `overig`, AH met een lege
-`eenheid`, en Jumbo zonder prijzen. Anders test je tegen fictie.
+`eenheid`, Jumbo zonder prijzen, en `product_id` als **string** omdat pg een
+bigint zo teruggeeft. Anders test je tegen fictie: die laatste ontbrak eerst, en
+daardoor bleef een vergelijkingsfout op `product_id` onzichtbaar tot de site op
+echte data draaide.
 
 ## Mappen
 

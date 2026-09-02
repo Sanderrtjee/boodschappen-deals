@@ -255,7 +255,12 @@ function verrijk(rij) {
   }
 
   return {
-    product_id: rij.product_id,
+    // product_id is een bigserial, en pg geeft bigint terug als string om
+    // precisieverlies te voorkomen. Hier wordt het één keer een getal, want
+    // verder in de app wordt er strikt op vergeleken: met de gekozen id's van
+    // een assistent-selectie, en in de browser met de boodschappenlijst.
+    // Zonder deze omzetting is "2403" === 2403 onwaar en matcht er nooit iets.
+    product_id: Number(rij.product_id),
     winkel: rij.winkel,
     naam: rij.naam,
     winkelcategorie: rij.categorie || null,
