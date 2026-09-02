@@ -4,6 +4,17 @@ Website die de weekaanbiedingen uit je eigen Postgres-database toont en
 rangschikt op het profiel van de bezoeker. De add-on schrijft niets naar de
 database, hij leest alleen.
 
+## Bijwerken
+
+In de SSH-terminal van Home Assistant, veilig om te herhalen:
+
+```bash
+rm -rf /tmp/bd && git clone --depth 1 https://github.com/Sanderrtjee/boodschappen-deals.git /tmp/bd && rm -rf /addons/boodschappen_deals && cp -r /tmp/bd/boodschappen_deals /addons/boodschappen_deals && rm -rf /tmp/bd && ha addons reload
+```
+
+Daarna in deze add-on op *Update* klikken, of bij een gelijk versienummer op
+drie puntjes → *Rebuild*.
+
 ## Configuratie
 
 | Optie | Uitleg |
