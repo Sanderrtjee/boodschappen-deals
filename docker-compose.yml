@@ -8,7 +8,7 @@ services:
     build:
       context: ./boodschappen_deals
       dockerfile: Dockerfile.standalone
-    image: boodschappen-deals:1.2.0
+    image: boodschappen-deals:1.2.1
     container_name: boodschappen-deals
     restart: unless-stopped
     ports:

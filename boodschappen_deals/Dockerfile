@@ -15,12 +15,18 @@
 # Home Assistant basisimage. Gecontroleerd in de registry: dat basisimage bevat
 # al lib/ld-musl-x86_64.so.1, usr/lib/libgcc_s.so.1 en usr/lib/libstdc++.so.6,
 # precies wat de Node-binary nodig heeft.
-FROM node:22.20-alpine3.21 AS nodebin
-
+# Deze twee ARG's staan bewust vóór de eerste FROM. Een ARG die ná een FROM
+# staat hoort bij díe stage en is niet zichtbaar in een volgende FROM-regel;
+# dan zou ${BUILD_FROM} leeg zijn en de build meteen falen.
+#
 # BUILD_FROM wordt door de Supervisor gevuld uit build.yaml. Let op: hij
 # accepteert alleen images uit zijn eigen namespace en valt bij iets anders stil
 # terug op ghcr.io/home-assistant/base:latest, waar geen Node in zit.
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:3.21
+ARG NODE_IMAGE=node:22.20-alpine3.21
+
+FROM ${NODE_IMAGE} AS nodebin
+
 FROM ${BUILD_FROM}
 
 COPY --from=nodebin /usr/local/bin/node /usr/local/bin/node
