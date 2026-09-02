@@ -197,20 +197,42 @@ Ziet de site er meteen goed uit maar staat er een gele balk *Demodata*? Dan
 draait de container wel, maar is de database niet bereikbaar of nog leeg. De
 melding in de balk en het add-on-log zeggen welke van de twee.
 
-### Over het basisimage
+### Over het bouwen van het image
 
-De add-on bouwt op `ghcr.io/home-assistant/{arch}-base:3.21`. Twee dingen daar
-zijn de moeite om te weten, want ik ben er allebei tegenaan gelopen:
+Deze build heeft **geen netwerk nodig tijdens de bouwstappen**, alleen twee
+image-pulls. Dat is geen luxe maar noodzaak, en het kostte drie mislukte builds
+om erachter te komen:
 
-- **De Supervisor accepteert alleen images uit zijn eigen namespace.** Zet je
-  `build_from` op bijvoorbeeld `node:22-alpine`, dan negeert hij dat en bouwt
-  hij stil op `ghcr.io/home-assistant/base:latest`. Daar zit geen Node in, dus
-  het faalt op `npm: not found` en de foutmelding wijst niet naar de oorzaak.
-  Kijk in dat geval in het buildlog naar de regel `load metadata for ...`: daar
-  staat welk image echt gebruikt wordt.
-- **Alpine 3.21, niet 3.19.** In 3.21 zit `nodejs 22`; 3.19 is end-of-life en
-  levert Node 20. Het ophalen van de pakketindex faalde ook een keer met
-  "temporary error", dus `apk add` heeft twee herkansingen gekregen.
+1. `apk add nodejs npm` faalde op `dl-cdn.alpinelinux.org` met "temporary
+   error (try again later)", drie keer op rij en elke keer na precies vijf
+   seconden, terwijl het ophalen van de images zelf vlekkeloos ging. Dat is een
+   DNS-timeout binnen de buildcontainer, geen wegvallende pakketserver.
+2. Uitwijken naar `node:22-alpine` als basis werkte niet: **de Supervisor
+   accepteert in `build_from` alleen images uit zijn eigen namespace** en valt
+   bij iets anders stil terug op `ghcr.io/home-assistant/base:latest`, waar geen
+   Node in zit. Je krijgt dan `npm: not found` zonder aanwijzing waarom. Kijk in
+   het buildlog naar `load metadata for ...` om te zien welk image echt gebruikt
+   wordt.
+
+Daarom nu:
+
+- **Node komt als binary uit `node:22.20-alpine3.21`** (eerste build-stage).
+  Die Alpine-versie is dezelfde als die van het basisimage. In de registry
+  gecontroleerd dat `ghcr.io/home-assistant/amd64-base:3.21` al
+  `ld-musl-x86_64.so.1`, `libgcc_s.so.1` en `libstdc++.so.6` bevat, precies wat
+  die binary nodig heeft.
+- **`pg` staat als `node_modules` in de repo** (14 pakketten, 789 kB), dus geen
+  `npm install` tijdens het bouwen.
+- De Dockerfile draait aan het eind `node -e "require('pg')"`, zodat een
+  probleem hiermee tijdens de bouw opvalt en niet pas als de add-on start.
+
+Wil je `pg` bijwerken:
+
+```bash
+cd boodschappen_deals/app && npm install pg@latest --omit=dev
+```
+
+en commit de gewijzigde `node_modules` en `package-lock.json` mee.
 
 Het basisimage heeft `ENTRYPOINT ["/init"]` (s6-overlay), dus de app start via
 `run.sh` en niet via een kale `CMD`. Die `run.sh` doet weinig: de
@@ -218,9 +240,6 @@ add-on-instellingen worden in Node zelf uit `/data/options.json` gelezen (zie
 `lib/config.js`), zodat er geen negen omgevingsvariabelen doorgegeven hoeven te
 worden. Draai je los met compose, dan bestaat dat bestand niet en komt alles uit
 omgevingsvariabelen; het log zegt welke van de twee gebruikt is.
-
-Buiten Home Assistant zijn s6 en bashio overbodig, dus compose gebruikt
-`Dockerfile.standalone` op een kaal Node-image. De applicatiecode is identiek.
 
 ## Door een Cloudflare-tunnel op je eigen domein
 
@@ -329,6 +348,7 @@ boodschappen-deals/
 │       ├── lib/score.js       eenheden, labels, korting, profielwegingen
 │       ├── lib/selecties.js   de door de assistent gekozen deals
 │       ├── lib/demo.js        voorbeelddata als er geen database is
+│       ├── node_modules/       pg, meegeleverd zodat de build offline kan
 │       └── public/            de website zelf
 ├── KOPPELEN.md                de twee koppelingen met n8n, met controlestappen
 ├── sql/schema.sql             tabellen, indexen, leesgebruiker

@@ -1,4 +1,8 @@
 node_modules/
+# Uitzondering: de dependency van de app staat wél in de repo, zodat de
+# add-on gebouwd kan worden zonder de npm-registry te bereiken.
+!/boodschappen_deals/app/node_modules/
+!/boodschappen_deals/app/node_modules/**
 npm-debug.log
 *.log
 .env

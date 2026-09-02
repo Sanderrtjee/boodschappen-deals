@@ -1,19 +1,14 @@
 # Alleen voor draaien buiten Home Assistant, met docker compose.
 #
 # Waarom een apart Dockerfile: het Home Assistant basisimage draait op
-# s6-overlay met ENTRYPOINT ["/init"] en heeft bashio nodig. Buiten Home
-# Assistant is dat allemaal overbodig, en dan is een kaal Node-image kleiner
-# en simpeler. De applicatiecode is identiek; alleen de basis en de start
-# verschillen.
-FROM node:22.20-alpine
+# s6-overlay met ENTRYPOINT ["/init"] en heeft bashio. Buiten Home Assistant is
+# dat overbodig, en dan is een kaal Node-image simpeler. De applicatiecode is
+# identiek, en `pg` komt hier net zo uit de meegeleverde node_modules.
+FROM node:22.20-alpine3.21
 
 RUN addgroup -g 10001 -S app && adduser -u 10001 -S app -G app
 
 WORKDIR /app
-
-COPY app/package.json ./
-RUN npm install --omit=dev --no-audit --no-fund && npm cache clean --force
-
 COPY app/ ./
 
 RUN mkdir -p /data && chown -R app:app /data /app

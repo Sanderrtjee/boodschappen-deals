@@ -1,4 +1,5 @@
-node_modules
+# node_modules wordt juist WEL meegenomen: `pg` is meegeleverd in de repo zodat
+# de build geen npm-registry hoeft te bereiken. Sluit die dus niet uit.
 npm-debug.log
 .git
 .gitignore
