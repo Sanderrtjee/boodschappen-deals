@@ -63,6 +63,7 @@ Kijk in het **Log** van de add-on, direct na het starten. Goed ziet er zo uit:
 
 ```
 info: Boodschappen Deals luistert op poort 8499
+info: Instellingen gelezen uit add-on-configuratie
 info: Database: boodschappen_web@192.168.1.20:5432/postgres
 info: Dataset geladen: 689 aanbiedingen
 ```

@@ -55,6 +55,7 @@ Kijk in het log na het starten. Je hoort daar te zien:
 
 ```
 info: Boodschappen Deals luistert op poort 8499
+info: Instellingen gelezen uit add-on-configuratie
 info: Database: boodschappen_web@192.168.1.20:5432/boodschappen
 info: Dataset geladen: 312 aanbiedingen
 ```

@@ -7,6 +7,7 @@ const path = require('node:path');
 const os = require('node:os');
 const { URL } = require('node:url');
 
+const { bouwConfig } = require('./lib/config');
 const { Database } = require('./lib/db');
 const { demoRijen } = require('./lib/demo');
 const { Selecties } = require('./lib/selecties');
@@ -16,26 +17,7 @@ const score = require('./lib/score');
 // Configuratie
 // ---------------------------------------------------------------------------
 
-const config = {
-  poort: parseInt(process.env.PORT || '8499', 10),
-  siteTitel: process.env.SITE_TITEL || 'Boodschappen Deals',
-  cacheMinuten: Math.max(1, parseInt(process.env.CACHE_MINUTEN || '15', 10)),
-  importToken: process.env.IMPORT_TOKEN || '',
-  demoAf: process.env.DEMO_MODE === '1',
-  // In de add-on is /data de vaste opslagmap. Draai je hem lokaal op Windows
-  // of macOS, dan willen we geen map in de root van de schijf aanmaken.
-  dataDir:
-    process.env.DATA_DIR ||
-    (process.platform === 'linux' ? '/data' : path.join(os.tmpdir(), 'boodschappen-deals')),
-  db: {
-    host: process.env.DB_HOST || '',
-    port: parseInt(process.env.DB_PORT || '5432', 10),
-    database: process.env.DB_NAME || 'boodschappen',
-    user: process.env.DB_USER || 'boodschappen',
-    password: process.env.DB_PASSWORD || '',
-    ssl: process.env.DB_SSL === 'true' || process.env.DB_SSL === '1'
-  }
-};
+const config = bouwConfig();
 
 function log(niveau, bericht) {
   const t = new Date().toISOString().replace('T', ' ').slice(0, 19);
@@ -640,6 +622,7 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(config.poort, '0.0.0.0', () => {
   log('info', config.siteTitel + ' luistert op poort ' + config.poort);
+  log('info', 'Instellingen gelezen uit ' + config.bron);
   log('info', db.beschikbaar
     ? 'Database: ' + config.db.user + '@' + config.db.host + ':' + config.db.port + '/' + config.db.database
     : 'Geen database ingesteld, de site draait op demodata.');

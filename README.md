@@ -145,8 +145,8 @@ ophalen. Je hebt de **Advanced SSH & Web Terminal**-add-on nodig, met
    > niet met een half verwijderde add-on achterlaat.
 
 3. **Installeren.** De add-on staat nu onder *Local add-ons* in de Add-on store.
-   De eerste build duurt een paar minuten, want Home Assistant bouwt het image op
-   je eigen machine en haalt daarvoor Node en `pg` op.
+   De eerste build duurt een paar minuten: Home Assistant bouwt het image op je
+   eigen machine en haalt daarvoor het Node-image en `pg` op.
 
 **Een update uitrollen** is het commando uit stap 2 opnieuw, plus:
 
@@ -196,6 +196,22 @@ in `config.yaml` omhoog zet.
 Ziet de site er meteen goed uit maar staat er een gele balk *Demodata*? Dan
 draait de container wel, maar is de database niet bereikbaar of nog leeg. De
 melding in de balk en het add-on-log zeggen welke van de twee.
+
+### Waarom een Node-image en geen Home Assistant basisimage
+
+De add-on staat op `node:22.20-alpine` in plaats van op een HA-basisimage met
+`apk add nodejs npm` erbij. Dat scheelt een download van
+`dl-cdn.alpinelinux.org` tijdens het bouwen, en die faalde in de praktijk. Verder
+zit in Alpine 3.19 (end-of-life) Node 20 in plaats van 22.
+
+Gevolg: geen `bashio`. De add-on-instellingen worden daarom in Node zelf uit
+`/data/options.json` gelezen, hetzelfde bestand dat bashio uitleest. Zie
+`lib/config.js`. Draai je de container los met compose, dan bestaat dat bestand
+niet en komt alles uit omgevingsvariabelen; het log zegt welke van de twee is
+gebruikt.
+
+Bijkomend voordeel: de add-on en de compose-variant gebruiken nu hetzelfde
+Dockerfile, dus er is één recept in plaats van twee die uit elkaar kunnen lopen.
 
 ## Door een Cloudflare-tunnel op je eigen domein
 
@@ -293,11 +309,10 @@ boodschappen-deals/
 ├── boodschappen_deals/        de add-on (dit is wat naar /addons/ gaat)
 │   ├── config.yaml            add-on-opties en ingress
 │   ├── build.yaml             basisimages per architectuur
-│   ├── Dockerfile             build voor Home Assistant
-│   ├── Dockerfile.standalone  build voor gewone docker
-│   ├── run.sh                 leest de add-on-opties en start Node
+│   ├── Dockerfile             één build voor de add-on en voor docker compose
 │   └── app/
 │       ├── server.js          HTTP-server en API
+│       ├── lib/config.js      instellingen uit /data/options.json of env
 │       ├── lib/db.js          de Postgres-query
 │       ├── lib/classify.js    productwoordenboek
 │       ├── lib/score.js       eenheden, labels, korting, profielwegingen
