@@ -1,0 +1,26 @@
+# Losse Docker-variant, voor als je niet via Home Assistant maar met
+# docker compose draait (NUC, Synology, VPS). Configuratie via omgevingsvariabelen.
+FROM node:22-alpine
+
+RUN addgroup -g 10001 -S app && adduser -u 10001 -S app -G app
+
+WORKDIR /app
+
+COPY app/package.json ./
+RUN npm install --omit=dev --no-audit --no-fund && npm cache clean --force
+
+COPY app/ ./
+
+RUN mkdir -p /data && chown -R app:app /data /app
+USER app
+
+ENV NODE_ENV=production \
+    PORT=8499 \
+    DATA_DIR=/data
+
+EXPOSE 8499
+
+HEALTHCHECK --interval=60s --timeout=5s --start-period=15s \
+  CMD node -e "fetch('http://127.0.0.1:8499/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+
+CMD ["node", "server.js"]

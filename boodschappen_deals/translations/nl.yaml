@@ -1,0 +1,30 @@
+configuration:
+  db_host:
+    name: Databasehost
+    description: Hostnaam of IP van je Postgres. Draait Postgres als add-on, gebruik dan de add-on-hostnaam, bijvoorbeeld core-postgres.
+  db_port:
+    name: Databasepoort
+    description: Vrijwel altijd 5432.
+  db_name:
+    name: Databasenaam
+    description: De database waar je n8n-flow de aanbiedingen in schrijft.
+  db_user:
+    name: Databasegebruiker
+    description: Gebruik bij voorkeur een account met alleen leesrechten. De site schrijft nooit.
+  db_password:
+    name: Wachtwoord
+    description: Wachtwoord van die databasegebruiker.
+  db_ssl:
+    name: SSL gebruiken
+    description: Aanzetten als je database een versleutelde verbinding vereist, bijvoorbeeld bij gehoste Postgres.
+  site_titel:
+    name: Titel van de site
+    description: Wat er in de kop van de pagina en in de browsertab staat.
+  cache_minuten:
+    name: Cacheduur in minuten
+    description: Hoe lang de aanbiedingen in het geheugen blijven voordat de database opnieuw gelezen wordt. 15 is een prima waarde.
+  import_token:
+    name: Importtoken
+    description: Zelf verzonnen geheim voor het insturen van recepten uit n8n en het verversen van de cache. Laat leeg om die endpoints uit te schakelen.
+network:
+  8499/tcp: Webinterface, dit is de poort die je door een Cloudflare-tunnel stuurt

@@ -1,0 +1,10 @@
+node_modules/
+npm-debug.log
+*.log
+.env
+data/
+
+# De aangepaste n8n-workflow blijft lokaal. Die bevat de e-mailadressen van de
+# ontvangers van de weekbrief, en die horen niet in een publieke repo. Genereer
+# hem zelf uit je eigen export met n8n/patch-workflow.js.
+n8n/workflow-*.json

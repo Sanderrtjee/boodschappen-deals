@@ -1,0 +1,30 @@
+configuration:
+  db_host:
+    name: Database host
+    description: Hostname or IP of your Postgres server. When Postgres runs as an add-on, use its add-on hostname, for example core-postgres.
+  db_port:
+    name: Database port
+    description: Almost always 5432.
+  db_name:
+    name: Database name
+    description: The database your n8n flow writes the offers into.
+  db_user:
+    name: Database user
+    description: Preferably a read-only account. This add-on never writes.
+  db_password:
+    name: Password
+    description: Password for that database user.
+  db_ssl:
+    name: Use SSL
+    description: Enable when your database requires an encrypted connection, such as with hosted Postgres.
+  site_titel:
+    name: Site title
+    description: Shown in the page header and the browser tab.
+  cache_minuten:
+    name: Cache duration in minutes
+    description: How long offers stay in memory before the database is read again. 15 is a sensible value.
+  import_token:
+    name: Import token
+    description: Your own secret for importing recipes from n8n and refreshing the cache. Leave empty to disable those endpoints.
+network:
+  8499/tcp: Web interface, this is the port you route through a Cloudflare tunnel

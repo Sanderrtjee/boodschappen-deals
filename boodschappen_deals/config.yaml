@@ -1,0 +1,49 @@
+name: Boodschappen Deals
+version: "1.0.0"
+slug: boodschappen_deals
+description: Website die de weekaanbiedingen van AH, Jumbo en Lidl uit je Postgres-database filtert en rangschikt per profiel
+url: https://github.com/Sanderrtjee/boodschappen-deals
+arch:
+  - aarch64
+  - amd64
+  - armv7
+init: false
+startup: application
+boot: auto
+hassio_api: false
+homeassistant_api: false
+
+# Ingress laat de site in het Home Assistant zijmenu zien.
+ingress: true
+ingress_port: 8499
+panel_icon: mdi:cart-percent
+panel_title: Boodschappen
+panel_admin: false
+
+# De losse poort is wat je door de Cloudflare-tunnel stuurt voor je eigen domein.
+ports:
+  8499/tcp: 8499
+ports_description:
+  8499/tcp: Webinterface voor je eigen domein via een Cloudflare-tunnel of het LAN
+
+options:
+  db_host: core-postgres
+  db_port: 5432
+  db_name: boodschappen
+  db_user: boodschappen
+  db_password: ""
+  db_ssl: false
+  site_titel: Boodschappen Deals
+  cache_minuten: 15
+  import_token: ""
+
+schema:
+  db_host: str
+  db_port: port
+  db_name: str
+  db_user: str
+  db_password: password
+  db_ssl: bool
+  site_titel: str
+  cache_minuten: int(1,1440)
+  import_token: password?

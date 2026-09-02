@@ -1,0 +1,27 @@
+# Alleen nodig als je NIET via de Home Assistant add-on draait.
+# Op Home Assistant OS gebruik je de add-on in de map boodschappen_deals.
+services:
+  boodschappen-deals:
+    build:
+      context: ./boodschappen_deals
+      dockerfile: Dockerfile.standalone
+    image: boodschappen-deals:1.0.0
+    container_name: boodschappen-deals
+    restart: unless-stopped
+    ports:
+      - "8499:8499"
+    environment:
+      DB_HOST: ${DB_HOST:-postgres}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME:-boodschappen}
+      DB_USER: ${DB_USER:-boodschappen}
+      DB_PASSWORD: ${DB_PASSWORD:?zet DB_PASSWORD in een .env bestand}
+      DB_SSL: ${DB_SSL:-false}
+      SITE_TITEL: ${SITE_TITEL:-Boodschappen Deals}
+      CACHE_MINUTEN: ${CACHE_MINUTEN:-15}
+      IMPORT_TOKEN: ${IMPORT_TOKEN:-}
+    volumes:
+      - boodschappen-data:/data
+
+volumes:
+  boodschappen-data:
