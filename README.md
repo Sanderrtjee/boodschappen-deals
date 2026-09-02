@@ -111,16 +111,45 @@ namelijk erger dan geen aanbiedingen.
 
 ## Installeren als Home Assistant add-on
 
-Home Assistant OS draait geen losse Docker-containers, dus dit is de route.
+Home Assistant OS draait geen losse Docker-containers, dus het moet als add-on.
+Er zijn twee routes naar dezelfde uitkomst.
 
-1. **Zet de bestanden op je HA-machine.** Via de Samba- of de Advanced
-   SSH-add-on kopieer je de map `boodschappen_deals` naar `/addons/`, zodat je
-   `/addons/boodschappen_deals/config.yaml` hebt.
-2. **Ververs de add-onlijst.** Instellingen → Add-ons → Add-on store → menu
-   rechtsboven → *Controleer op updates*. De add-on verschijnt onder
-   *Local add-ons*.
-3. **Installeren.** De eerste build duurt een paar minuten, want de container
-   haalt Node en `pg` op.
+### Route A: via GitHub, als add-on repository (aanbevolen)
+
+Deze repo heeft daarvoor al de juiste vorm: `repository.yaml` in de root en de
+add-on in de submap `boodschappen_deals/`.
+
+1. **Maak een GitHub-repo** en push deze map:
+
+   ```bash
+   git remote add origin https://github.com/<jouw-gebruiker>/boodschappen-deals.git
+   git push -u origin main
+   ```
+
+   De repo moet **publiek** zijn, want Home Assistant kloont hem zonder inloggen.
+   Er staan geen geheimen in: het databasewachtwoord en het importtoken vul je in
+   de add-on-configuratie in, niet in de code.
+
+2. **Voeg de repo toe in Home Assistant.** Instellingen → Add-ons → Add-on store
+   → menu rechtsboven → *Repositories* → plak de URL van je repo.
+
+3. **Installeer** *Boodschappen Deals*, dat nu in de store staat. De eerste build
+   duurt een paar minuten, want Home Assistant bouwt het image op je eigen
+   machine en haalt daarvoor Node en `pg` op.
+
+Een update uitrollen doe je later met `git push`, plus **`version` omhoog in
+`boodschappen_deals/config.yaml`**. Zonder dat ziet Home Assistant geen nieuwe
+versie en blijft de oude draaien.
+
+### Route B: als lokale add-on, zonder git
+
+Sneller voor één machine, maar updaten gaat met de hand.
+
+1. Kopieer via de Samba- of Advanced SSH-add-on de map `boodschappen_deals`
+   naar `/addons/`, zodat je `/addons/boodschappen_deals/config.yaml` hebt.
+2. Instellingen → Add-ons → Add-on store → menu rechtsboven →
+   *Controleer op updates*. De add-on verschijnt onder *Local add-ons*.
+3. Installeren.
 4. **Configureren** (tab Configuratie):
 
    | Optie | Betekenis |
