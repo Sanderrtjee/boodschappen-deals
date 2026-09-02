@@ -1,16 +1,14 @@
 # Alleen nodig als je NIET via de Home Assistant add-on draait.
 # Op Home Assistant OS gebruik je de add-on in de map boodschappen_deals.
 #
-# Zelfde Dockerfile als de add-on; BUILD_FROM geven we hier zelf mee omdat
-# Home Assistant dat normaal uit build.yaml doet.
+# Gebruikt Dockerfile.standalone: buiten Home Assistant is s6-overlay en bashio
+# overbodig, dus een kaal Node-image is kleiner en simpeler.
 services:
   boodschappen-deals:
     build:
       context: ./boodschappen_deals
-      dockerfile: Dockerfile
-      args:
-        BUILD_FROM: node:22.20-alpine
-    image: boodschappen-deals:1.1.0
+      dockerfile: Dockerfile.standalone
+    image: boodschappen-deals:1.1.1
     container_name: boodschappen-deals
     restart: unless-stopped
     ports:

@@ -1,9 +1,11 @@
-# Officiele Node-images. Die zijn multi-arch, dus per architectuur dezelfde tag.
-# Bewust vastgezet op een minor-versie zodat een build reproduceerbaar blijft.
+# Home Assistant basisimages op Alpine 3.21, want daar zit nodejs 22 in.
+# Alleen images uit de home-assistant-namespace worden door de Supervisor
+# geaccepteerd; bij iets anders valt hij stil terug op zijn eigen basisimage
+# zonder Node erin.
 build_from:
-  amd64: node:22.20-alpine
-  aarch64: node:22.20-alpine
-  armv7: node:22.20-alpine
+  amd64: ghcr.io/home-assistant/amd64-base:3.21
+  aarch64: ghcr.io/home-assistant/aarch64-base:3.21
+  armv7: ghcr.io/home-assistant/armv7-base:3.21
 labels:
   org.opencontainers.image.title: Boodschappen Deals
   org.opencontainers.image.description: Supermarktaanbiedingen gefilterd op profiel

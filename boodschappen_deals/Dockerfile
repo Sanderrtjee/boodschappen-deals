@@ -1,14 +1,18 @@
-# Basis is een officieel Node-image, geen Home Assistant basisimage.
+# Basis is het Home Assistant basisimage. Dat is geen willekeurige keuze:
+# de Supervisor accepteert alleen images uit zijn eigen namespace en valt bij
+# iets anders (bijvoorbeeld node:22-alpine) stil terug op
+# ghcr.io/home-assistant/base:latest, waar geen Node in zit.
 #
-# Waarom: op een HA-basisimage moet Node met `apk add nodejs npm` erbij, en die
-# download naar dl-cdn.alpinelinux.org faalde tijdens het bouwen. Bovendien zit
-# in Alpine 3.19 (end-of-life) Node 20 in plaats van 22. Met dit image is er
-# geen pakketindex meer nodig en staat de Node-versie vast.
-#
-# Home Assistant vult BUILD_FROM uit build.yaml; docker compose geeft hem mee
-# als build-arg. Zo bouwen beide met precies hetzelfde recept.
-ARG BUILD_FROM=node:22-alpine
+# build.yaml zet dit op Alpine 3.21, want daar zit nodejs 22 in. Alpine 3.19,
+# waar dit eerst op stond, is end-of-life en levert nog Node 20.
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:3.21
 FROM ${BUILD_FROM}
+
+# De pakketindex ophalen faalde een keer met "temporary error (try again
+# later)", dus twee herkansingen. Kost niets als het meteen lukt.
+RUN apk add --no-cache nodejs npm \
+ || (sleep 5 && apk add --no-cache nodejs npm) \
+ || (sleep 20 && apk add --no-cache nodejs npm)
 
 WORKDIR /app
 
@@ -19,17 +23,15 @@ RUN npm install --omit=dev --no-audit --no-fund && npm cache clean --force
 
 COPY app/ ./
 
-# Blijft als root draaien: /data wordt door de Supervisor als root aangemaakt,
-# en een andere gebruiker kan daar dan niet in schrijven.
+COPY run.sh /run.sh
+RUN chmod a+x /run.sh
+
 ENV NODE_ENV=production \
     PORT=8499 \
     DATA_DIR=/data
 
 EXPOSE 8499
 
-HEALTHCHECK --interval=60s --timeout=5s --start-period=15s \
-  CMD node -e "fetch('http://127.0.0.1:8499/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
-
-# De add-on-instellingen worden in Node zelf uit /data/options.json gelezen,
-# dus er is geen shellwrapper met bashio nodig.
-CMD [ "node", "server.js" ]
+# Het basisimage heeft ENTRYPOINT ["/init"] (s6-overlay), dus de app wordt via
+# run.sh gestart. Een kale CMD zou onder s6 anders behandeld worden.
+CMD [ "/run.sh" ]

@@ -197,21 +197,30 @@ Ziet de site er meteen goed uit maar staat er een gele balk *Demodata*? Dan
 draait de container wel, maar is de database niet bereikbaar of nog leeg. De
 melding in de balk en het add-on-log zeggen welke van de twee.
 
-### Waarom een Node-image en geen Home Assistant basisimage
+### Over het basisimage
 
-De add-on staat op `node:22.20-alpine` in plaats van op een HA-basisimage met
-`apk add nodejs npm` erbij. Dat scheelt een download van
-`dl-cdn.alpinelinux.org` tijdens het bouwen, en die faalde in de praktijk. Verder
-zit in Alpine 3.19 (end-of-life) Node 20 in plaats van 22.
+De add-on bouwt op `ghcr.io/home-assistant/{arch}-base:3.21`. Twee dingen daar
+zijn de moeite om te weten, want ik ben er allebei tegenaan gelopen:
 
-Gevolg: geen `bashio`. De add-on-instellingen worden daarom in Node zelf uit
-`/data/options.json` gelezen, hetzelfde bestand dat bashio uitleest. Zie
-`lib/config.js`. Draai je de container los met compose, dan bestaat dat bestand
-niet en komt alles uit omgevingsvariabelen; het log zegt welke van de twee is
-gebruikt.
+- **De Supervisor accepteert alleen images uit zijn eigen namespace.** Zet je
+  `build_from` op bijvoorbeeld `node:22-alpine`, dan negeert hij dat en bouwt
+  hij stil op `ghcr.io/home-assistant/base:latest`. Daar zit geen Node in, dus
+  het faalt op `npm: not found` en de foutmelding wijst niet naar de oorzaak.
+  Kijk in dat geval in het buildlog naar de regel `load metadata for ...`: daar
+  staat welk image echt gebruikt wordt.
+- **Alpine 3.21, niet 3.19.** In 3.21 zit `nodejs 22`; 3.19 is end-of-life en
+  levert Node 20. Het ophalen van de pakketindex faalde ook een keer met
+  "temporary error", dus `apk add` heeft twee herkansingen gekregen.
 
-Bijkomend voordeel: de add-on en de compose-variant gebruiken nu hetzelfde
-Dockerfile, dus er is één recept in plaats van twee die uit elkaar kunnen lopen.
+Het basisimage heeft `ENTRYPOINT ["/init"]` (s6-overlay), dus de app start via
+`run.sh` en niet via een kale `CMD`. Die `run.sh` doet weinig: de
+add-on-instellingen worden in Node zelf uit `/data/options.json` gelezen (zie
+`lib/config.js`), zodat er geen negen omgevingsvariabelen doorgegeven hoeven te
+worden. Draai je los met compose, dan bestaat dat bestand niet en komt alles uit
+omgevingsvariabelen; het log zegt welke van de twee gebruikt is.
+
+Buiten Home Assistant zijn s6 en bashio overbodig, dus compose gebruikt
+`Dockerfile.standalone` op een kaal Node-image. De applicatiecode is identiek.
 
 ## Door een Cloudflare-tunnel op je eigen domein
 
@@ -309,7 +318,9 @@ boodschappen-deals/
 ├── boodschappen_deals/        de add-on (dit is wat naar /addons/ gaat)
 │   ├── config.yaml            add-on-opties en ingress
 │   ├── build.yaml             basisimages per architectuur
-│   ├── Dockerfile             één build voor de add-on en voor docker compose
+│   ├── Dockerfile             build voor Home Assistant (HA-basisimage, s6)
+│   ├── Dockerfile.standalone  build voor gewone docker (kaal Node-image)
+│   ├── run.sh                 startscript van de add-on
 │   └── app/
 │       ├── server.js          HTTP-server en API
 │       ├── lib/config.js      instellingen uit /data/options.json of env
