@@ -187,5 +187,5 @@ door in plaats van de `product_id` uit de database. Zie
 | `password authentication failed` | Gebruiker of wachtwoord fout, of `pg_hba.conf` laat dat IP niet toe. |
 | `permission denied for table products` | De leesgebruiker heeft geen `SELECT`. Zie `sql/schema.sql`. |
 | Site werkt, maar geen assistent-profielen | Koppeling ② ontbreekt of het token klopt niet. Test met de GET-node. |
-| n8n geeft `401 Ongeldig of ontbrekend token` | Header mist het woord `Bearer `, of het token in de add-on is na het instellen niet herstart. |
+| n8n geeft `401 Ongeldig of ontbrekend token` | Drie mogelijke oorzaken. Kijk eerst in het add-on-log: staat er `Geen import_token ingesteld`, dan is het veld leeg. Staat er `Import-endpoints staan aan`, dan klopt het token in de add-on en is de **Value** in n8n het probleem: die moet `Bearer <token>` zijn, dus met dat woord ervoor. Heb je het token net ingevuld, dan moet de add-on nog **herstart** worden, want de instellingen worden bij het starten gelezen. |
 | Alles werkt, maar de selectie is leeg | De gekozen producten staan niet meer in de laatste scrape. De site meldt dat zelf. |

@@ -53,7 +53,9 @@ function bouwConfig() {
       1,
       alsGetal(optie('cache_minuten') ?? process.env.CACHE_MINUTEN, 15)
     ),
-    importToken: String(optie('import_token') || process.env.IMPORT_TOKEN || ''),
+    // Trimmen, want een onzichtbare spatie of regeleinde achter het token in de
+    // add-on-configuratie geeft een 401 die niet te zien is.
+    importToken: String(optie('import_token') || process.env.IMPORT_TOKEN || '').trim(),
     demoAf: process.env.DEMO_MODE === '1',
     // In de add-on is /data de vaste opslagmap. Draai je hem lokaal op Windows
     // of macOS, dan willen we geen map in de root van de schijf aanmaken.

@@ -623,6 +623,14 @@ const server = http.createServer(async (req, res) => {
 server.listen(config.poort, '0.0.0.0', () => {
   log('info', config.siteTitel + ' luistert op poort ' + config.poort);
   log('info', 'Instellingen gelezen uit ' + config.bron);
+  // Zonder token geeft /api/import/* altijd 401. Dat is opzet, maar het is een
+  // 401 die niets over de oorzaak zegt, dus zeg het hier wel.
+  log(
+    config.importToken ? 'info' : 'waarschuwing',
+    config.importToken
+      ? 'Import-endpoints staan aan, token is ingesteld (' + config.importToken.length + ' tekens)'
+      : 'Geen import_token ingesteld: /api/import/selectie en /api/verversen geven 401'
+  );
   log('info', db.beschikbaar
     ? 'Database: ' + config.db.user + '@' + config.db.host + ':' + config.db.port + '/' + config.db.database
     : 'Geen database ingesteld, de site draait op demodata.');
