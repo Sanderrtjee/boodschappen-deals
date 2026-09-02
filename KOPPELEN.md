@@ -131,9 +131,11 @@ Neem het IP.
 
 1. Verzin een lang geheim, bijvoorbeeld met `openssl rand -hex 24`.
 2. Zet het in de add-on bij `import_token` en herstart de add-on.
-3. Maak in n8n één credential aan van het type **Header Auth**:
-   - **Name:** `Authorization`
-   - **Value:** `Bearer JOUW_TOKEN`
+3. Maak in n8n één credential aan. Twee types werken, let op het verschil:
+   - **Bearer Auth**: vul alleen het token in. n8n zet er zelf `Bearer ` voor.
+     Dit is de minst foutgevoelige keuze.
+   - **Header Auth**: Name `Authorization`, Value `Bearer JOUW_TOKEN`. Vergeet je
+     dat woord `Bearer ` met de spatie erna, dan krijg je een 401.
 
    Die credential kun je bij elke HTTP Request-node hergebruiken. Dat is beter
    dan het token in de node zelf typen, want dan staat het niet in je

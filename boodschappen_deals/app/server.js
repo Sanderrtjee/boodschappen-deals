@@ -303,12 +303,55 @@ function leesBody(req, maxBytes) {
   });
 }
 
-function tokenGeldig(req) {
-  if (!config.importToken) return false;
-  const kop = req.headers.authorization || '';
-  const bearer = kop.startsWith('Bearer ') ? kop.slice(7).trim() : '';
+// Geeft niet alleen goed of fout terug maar ook waaróm. Een 401 met alleen
+// "ongeldig of ontbrekend token" laat je zoeken tussen een leeg tokenveld, een
+// vergeten herstart en een Authorization-header zonder "Bearer " ervoor.
+// Die drie zijn hier van elkaar te onderscheiden.
+function tokenControle(req) {
+  const kop = String(req.headers.authorization || '');
   const los = String(req.headers['x-import-token'] || '').trim();
-  return bearer === config.importToken || los === config.importToken;
+
+  if (!config.importToken) {
+    return {
+      ok: false,
+      fout:
+        'Deze add-on heeft geen import_token ingesteld, dus de import-endpoints staan uit. ' +
+        'Vul het veld Import token in bij de add-on-configuratie en herstart de add-on.'
+    };
+  }
+
+  if (!kop && !los) {
+    return {
+      ok: false,
+      fout:
+        'Geen token meegestuurd. Stuur een header Authorization met de waarde ' +
+        '"Bearer <token>", of een header X-Import-Token met alleen het token.'
+    };
+  }
+
+  if (kop && !kop.startsWith('Bearer ')) {
+    return {
+      ok: false,
+      fout:
+        'De Authorization-header moet met "Bearer " beginnen, met een spatie erna. ' +
+        'Gebruik je in n8n een Header Auth-credential, zet de Value dan op ' +
+        '"Bearer <token>"; met een Bearer Auth-credential zet n8n dat woord er zelf voor.'
+    };
+  }
+
+  const bearer = kop.startsWith('Bearer ') ? kop.slice(7).trim() : '';
+  if (bearer === config.importToken || los === config.importToken) return { ok: true };
+
+  return {
+    ok: false,
+    fout:
+      'Het token klopt niet. Het moet exact gelijk zijn aan het veld Import token ' +
+      'in de add-on-configuratie (' + config.importToken.length + ' tekens).'
+  };
+}
+
+function tokenGeldig(req) {
+  return tokenControle(req).ok;
 }
 
 // ---------------------------------------------------------------------------
@@ -554,7 +597,8 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === 'POST' && pad === '/api/import/recepten') {
-      if (!tokenGeldig(req)) return stuurJson(res, 401, { fout: 'Ongeldig of ontbrekend token' });
+      const check = tokenControle(req);
+      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
       const ruw = await leesBody(req, 1024 * 512);
       let data;
       try {
@@ -573,7 +617,8 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === 'POST' && pad === '/api/import/selectie') {
-      if (!tokenGeldig(req)) return stuurJson(res, 401, { fout: 'Ongeldig of ontbrekend token' });
+      const check = tokenControle(req);
+      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
       const ruw = await leesBody(req, 1024 * 512);
       let data;
       try {
@@ -596,14 +641,16 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === 'DELETE' && pad.startsWith('/api/import/selectie/')) {
-      if (!tokenGeldig(req)) return stuurJson(res, 401, { fout: 'Ongeldig of ontbrekend token' });
+      const check = tokenControle(req);
+      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
       const sleutel = decodeURIComponent(pad.slice('/api/import/selectie/'.length));
       const weg = await selecties.verwijder(sleutel);
       return stuurJson(res, weg ? 200 : 404, weg ? { status: 'ok' } : { fout: 'Niet gevonden' });
     }
 
     if (req.method === 'POST' && pad === '/api/verversen') {
-      if (!tokenGeldig(req)) return stuurJson(res, 401, { fout: 'Ongeldig of ontbrekend token' });
+      const check = tokenControle(req);
+      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
       const data = await haalDataset(true);
       return stuurJson(res, 200, { status: 'ok', aanbiedingen: data.items.length, demo: data.demo });
     }
