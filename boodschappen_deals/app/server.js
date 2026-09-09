@@ -180,10 +180,26 @@ const sorteerders = {
   winkel: (a, b) => a.item.winkel.localeCompare(b.item.winkel, 'nl') || b.score - a.score
 };
 
+// Sommige scrapers halen een URL rechtstreeks uit ruwe HTML en decoderen de
+// entities daarin niet. Zo staat er bij PLUS "...w=120&amp;h=120..." in de
+// database in plaats van "...w=120&h=120...": voor de browser is dat een
+// query-parameter met de letterlijke tekst "amp;h" erin, en die bestaat niet
+// bij de CDN, dus laadt de afbeelding niet. Deze paar entities zijn de enige
+// die in een URL kunnen voorkomen (query-strings bevatten geen andere HTML).
+function decodeerEntities(waarde) {
+  return String(waarde)
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+}
+
 // De links en afbeeldingen komen uit gescrapete HTML. We laten alleen http(s)
 // door, zodat een rare waarde in de database geen javascript:-link kan worden.
 function veiligeUrl(waarde) {
-  return /^https?:\/\//i.test(String(waarde || '')) ? waarde : null;
+  if (!/^https?:\/\//i.test(String(waarde || ''))) return null;
+  return decodeerEntities(waarde);
 }
 
 function naarBuiten(rij) {

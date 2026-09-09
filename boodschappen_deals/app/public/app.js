@@ -331,9 +331,13 @@ function scoreband(d) {
 
 function kaartHtml(d) {
   const inLijst = lijst.some((x) => x.id === d.id);
+  const letter = ontsnap((d.naam || '?').charAt(0).toUpperCase());
+  // data-fallback zodat de foutafhandeling (zie letBeeldFouten) de letter kan
+  // tonen zonder terug te hoeven grijpen naar de deal-data: de afbeelding-URL
+  // komt uit externe winkel-CDN's die soms een plaatje laten mislukken.
   const beeld = d.afbeelding
-    ? '<img src="' + ontsnap(d.afbeelding) + '" alt="" loading="lazy" referrerpolicy="no-referrer">'
-    : '<span>' + ontsnap((d.naam || '?').charAt(0).toUpperCase()) + '</span>';
+    ? '<img src="' + ontsnap(d.afbeelding) + '" alt="" loading="lazy" referrerpolicy="no-referrer" data-fallback="' + letter + '">'
+    : '<span>' + letter + '</span>';
 
   const naam = d.link
     ? '<a href="' + ontsnap(d.link) + '" target="_blank" rel="noopener noreferrer">' + ontsnap(d.naam) + '</a>'
@@ -713,7 +717,27 @@ function themaZetten(thema) {
   veiligSchrijf('bd_thema', thema);
 }
 
+// 'error' op een <img> borrelt niet omhoog, dus dit moet met capture=true op
+// een voorouder staan. Bij een mislukte load (bijv. een winkel-CDN die de
+// afbeelding niet meer heeft) tonen we dezelfde letter-placeholder als bij een
+// deal zonder afbeelding, in plaats van een kapot plaatje.
+function letBeeldFouten() {
+  document.addEventListener(
+    'error',
+    (e) => {
+      const img = e.target;
+      if (!(img instanceof HTMLImageElement) || !img.closest('.kaart-beeld')) return;
+      const span = document.createElement('span');
+      span.textContent = img.dataset.fallback || '?';
+      img.replaceWith(span);
+    },
+    true
+  );
+}
+
 function bedraad() {
+  letBeeldFouten();
+
   el('kaarten').addEventListener('click', (e) => {
     const knop = e.target.closest('.toevoeg');
     if (knop) lijstWissel(Number(knop.dataset.id));
