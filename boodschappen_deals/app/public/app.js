@@ -187,6 +187,42 @@ function bouwProfielen() {
     });
     houder.appendChild(b);
   }
+
+  // Het gekozen profiel kan achteraan de rij staan, bijvoorbeeld uit een
+  // gedeelde link. Schuif het dan in beeld, zonder animatie bij het laden.
+  const gekozen = houder.querySelector('[aria-checked="true"]');
+  if (gekozen) {
+    const r = houder.getBoundingClientRect();
+    const k = gekozen.getBoundingClientRect();
+    if (k.left < r.left || k.right > r.right) {
+      houder.scrollTo({ left: houder.scrollLeft + k.left - r.left - 20, behavior: 'instant' });
+    }
+  }
+  profielRandBijwerken();
+}
+
+// Welke kant van de profielrij nog kaarten verbergt: bepaalt de zachte rand
+// en welke pijlknoppen zichtbaar zijn.
+function profielRandBijwerken() {
+  const houder = el('profielen');
+  const links = houder.scrollLeft > 2;
+  const rechts = houder.scrollLeft + houder.clientWidth < houder.scrollWidth - 2;
+  houder.classList.toggle('kan-links', links);
+  houder.classList.toggle('kan-rechts', rechts);
+  el('profielenLinks').hidden = !links;
+  el('profielenRechts').hidden = !rechts;
+}
+
+function profielRijBedraden() {
+  const houder = el('profielen');
+  const stap = (richting) => {
+    const zacht = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    houder.scrollBy({ left: richting * houder.clientWidth * 0.8, behavior: zacht ? 'smooth' : 'instant' });
+  };
+  el('profielenLinks').addEventListener('click', () => stap(-1));
+  el('profielenRechts').addEventListener('click', () => stap(1));
+  houder.addEventListener('scroll', profielRandBijwerken, { passive: true });
+  new ResizeObserver(profielRandBijwerken).observe(houder);
 }
 
 function bouwWinkels() {
@@ -737,6 +773,7 @@ function letBeeldFouten() {
 
 function bedraad() {
   letBeeldFouten();
+  profielRijBedraden();
 
   el('kaarten').addEventListener('click', (e) => {
     const knop = e.target.closest('.toevoeg');

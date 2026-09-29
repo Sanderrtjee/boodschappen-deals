@@ -1,5 +1,5 @@
 name: Boodschappen Deals
-version: "1.2.6"
+version: "1.2.7"
 slug: boodschappen_deals
 description: Website die de weekaanbiedingen van AH, Jumbo en Lidl uit je Postgres-database filtert en rangschikt per profiel
 url: https://github.com/Sanderrtjee/boodschappen-deals

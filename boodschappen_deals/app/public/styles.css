@@ -256,16 +256,61 @@ html[data-thema="donker"] .icoon-maan { display: block; }
 
 .omhulsel { max-width: 1360px; margin: 0 auto; padding: 24px 20px 56px; }
 
-.profielkiezer { margin-bottom: 22px; }
+.profielkiezer { margin-bottom: 4px; }
 .profielkiezer-kop h1 { font-size: 26px; margin-bottom: 5px; }
 .profielkiezer-kop p { color: var(--tekst-zacht); font-size: 14.5px; margin-bottom: 16px; }
 
+/* Eén rij profielkaarten die je zijwaarts schuift. Met overflow-x snijdt de
+   browser ook verticaal af, dus de padding geeft schaduw en hover-lift ruimte.
+   Die onderpadding vervangt de marge onder .profielkiezer. */
+.profielen-rij { position: relative; }
 .profielen {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(178px, 1fr));
+  display: flex;
   gap: 10px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 20px;
+  scrollbar-width: none;
+  padding: 6px 20px 20px;
+  margin: -6px -20px 0;
 }
+.profielen::-webkit-scrollbar { display: none; }
+/* Zachte rand aan de kant waar nog kaarten verstopt zitten. */
+.profielen.kan-links { mask-image: linear-gradient(to right, transparent, #000 56px); }
+.profielen.kan-rechts { mask-image: linear-gradient(to left, transparent, #000 56px); }
+.profielen.kan-links.kan-rechts {
+  mask-image: linear-gradient(to right, transparent, #000 56px, #000 calc(100% - 56px), transparent);
+}
+.profielen-pijl {
+  position: absolute;
+  top: calc(50% - 7px);
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border: 1px solid var(--glas-rand);
+  border-radius: 50%;
+  background: var(--vlak);
+  backdrop-filter: blur(var(--glas-blur)) saturate(160%);
+  -webkit-backdrop-filter: blur(var(--glas-blur)) saturate(160%);
+  box-shadow: var(--schaduw);
+  color: var(--tekst);
+  cursor: pointer;
+  transition: border-color .15s, transform .15s;
+}
+.profielen-pijl svg { width: 18px; height: 18px; }
+.profielen-pijl:hover { border-color: var(--rand-hard); }
+.profielen-pijl:active { transform: translateY(-50%) scale(.94); }
+.profielen-pijl.links { left: -10px; }
+.profielen-pijl.rechts { right: -10px; }
+.profielen-pijl[hidden] { display: none; }
+/* Op een touchscherm veeg je gewoon; knoppen zitten dan alleen in de weg. */
+@media (hover: none) { .profielen-pijl { display: none; } }
+
 .profiel {
+  flex: 0 0 216px;
+  scroll-snap-align: start;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -747,20 +792,9 @@ html[data-thema="donker"] .icoon-maan { display: block; }
   .merk { min-width: 0; }
   .merk-tekst strong, .merk-tekst small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .omhulsel { padding: 18px 14px 48px; }
-  /* Tien profielkaarten onder elkaar duwen de aanbiedingen van het scherm af.
-     Op een telefoon wordt het daarom één rij die je zijwaarts schuift. */
-  .profielen {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    padding-bottom: 4px;
-    margin-inline: -14px;
-    padding-inline: 14px;
-    scrollbar-width: none;
-  }
-  .profielen::-webkit-scrollbar { display: none; }
-  .profiel { flex: 0 0 auto; width: 168px; scroll-snap-align: start; }
+  /* Smallere kaarten en een rand die past bij de kleinere paginapadding. */
+  .profielen { gap: 8px; margin-inline: -14px; padding-inline: 14px; scroll-padding-inline: 14px; }
+  .profiel { flex-basis: 168px; }
   .profiel-tekst span { display: none; }
   /* Bij een assistent-selectie is die regel wél kort en wél relevant: daar
      staat het merkje en hoeveel van de gekozen deals nog actueel zijn. */
