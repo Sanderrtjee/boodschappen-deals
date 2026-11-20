@@ -61,7 +61,7 @@
         <svg class="icoon-zon"><use href="#i-zon"></use></svg>
         <svg class="icoon-maan"><use href="#i-maan"></use></svg>
       </button>
-      <button class="knop knop-primair" id="lijstKnop">
+      <button class="knop knop-primair" id="lijstKnop" aria-controls="lade" aria-expanded="false">
         <svg><use href="#i-cart"></use></svg>
         <span class="alleen-breed">Mijn lijst</span>
         <span class="badge" id="lijstAantal">0</span>
@@ -92,7 +92,7 @@
       <input type="search" id="zoek" placeholder="Zoek op product, bijvoorbeeld zalm of kwark" autocomplete="off">
       <button class="zoek-wis verborgen" id="zoekWis" aria-label="Zoekterm wissen"><svg><use href="#i-sluit"></use></svg></button>
     </label>
-    <button class="knop knop-rand alleen-smal" id="filterKnop">
+    <button class="knop knop-rand alleen-smal" id="filterKnop" aria-controls="zijbalk" aria-expanded="false">
       <svg><use href="#i-filter"></use></svg> Filters <span class="badge badge-stil" id="filterAantal">0</span>
     </button>
     <label class="sorteer">
@@ -124,11 +124,11 @@
       <fieldset class="filtergroep">
         <legend>Huishouden</legend>
         <div class="segment" id="huishouden" role="radiogroup" aria-label="Aantal personen">
-          <button data-waarde="1">1</button>
-          <button data-waarde="2" class="actief">2</button>
-          <button data-waarde="3">3</button>
-          <button data-waarde="4">4</button>
-          <button data-waarde="5">5+</button>
+          <button type="button" role="radio" aria-checked="false" data-waarde="1">1</button>
+          <button type="button" role="radio" aria-checked="true" data-waarde="2" class="actief">2</button>
+          <button type="button" role="radio" aria-checked="false" data-waarde="3">3</button>
+          <button type="button" role="radio" aria-checked="false" data-waarde="4">4</button>
+          <button type="button" role="radio" aria-checked="false" data-waarde="5" aria-label="5 of meer">5+</button>
         </div>
         <p class="hint">Bij een klein huishouden wegen 3-voor-acties minder mee.</p>
       </fieldset>
@@ -165,9 +165,9 @@
         <label class="vinkje"><input type="checkbox" id="alleenKorting"> <span>Alleen echte kortingen</span></label>
         <label class="vinkje"><input type="checkbox" id="toonNonfood"> <span>Ook non-food tonen</span></label>
         <div class="segment segment-vol" id="winkelbezoek" role="radiogroup" aria-label="Waar geldig">
-          <button data-waarde="alles" class="actief">Overal</button>
-          <button data-waarde="online">Ook online</button>
-          <button data-waarde="winkel">Alleen winkel</button>
+          <button type="button" role="radio" aria-checked="true" data-waarde="alles" class="actief">Overal</button>
+          <button type="button" role="radio" aria-checked="false" data-waarde="online">Ook online</button>
+          <button type="button" role="radio" aria-checked="false" data-waarde="winkel">Alleen winkel</button>
         </div>
       </fieldset>
 
@@ -177,10 +177,10 @@
     <section class="resultaten">
       <div class="samenvatting" id="samenvatting"></div>
       <div class="kaarten" id="kaarten"></div>
-      <div class="leeg verborgen" id="leeg">
+      <div class="leeg verborgen" id="leeg" role="status">
         <h3 id="leegTitel">Niets gevonden</h3>
         <p id="leegUitleg">Deze combinatie van filters levert geen aanbiedingen op. Probeer een winkel bij te zetten of de minimale korting te verlagen.</p>
-        <button class="knop knop-rand" id="leegReset">Filters herstellen</button>
+        <button class="knop knop-rand" id="leegReset" type="button">Filters loslaten</button>
       </div>
       <div class="meer">
         <button class="knop knop-rand knop-vol verborgen" id="meerKnop">Meer aanbiedingen laden</button>
@@ -202,7 +202,7 @@
 
 <div class="overlay verborgen" id="overlay"></div>
 
-<aside class="lade verborgen" id="lade" aria-label="Mijn boodschappenlijst">
+<aside class="lade verborgen" id="lade" role="dialog" aria-modal="true" aria-label="Mijn boodschappenlijst">
   <div class="lade-kop">
     <strong>Mijn lijst</strong>
     <button class="knop knop-plat" id="ladeSluit" aria-label="Sluiten"><svg><use href="#i-sluit"></use></svg></button>
