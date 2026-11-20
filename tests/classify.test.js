@@ -174,3 +174,9 @@ test('merknamen en speelgoed', () => {
   assert.equal(k('Doorables knuffel', 'Sintassortiment ').is_snoep, false);
   assert.equal(k("Pim's of scholiertje").bevat_vis, false);
 });
+
+test('koffiecapsules zijn geen non-food', () => {
+  const c = k('Alle capsules voor Nespresso 10-36 stuks', 'Koffie, thee');
+  assert.equal(c.is_nonfood, false);
+  assert.equal(c.hoofdcategorie, 'Dranken');
+});

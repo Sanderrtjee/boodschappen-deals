@@ -994,6 +994,8 @@ function bedraad() {
 
   const herstel = () => {
     staat = { ...STANDAARD };
+    // Alles terug naar af, dus ook de selectie van de assistent weer als start.
+    veiligSchrijf('bd_profiel_gekozen', false);
     el('zoek').value = '';
     el('zoekWis').classList.add('verborgen');
     el('sorteer').value = staat.sort;

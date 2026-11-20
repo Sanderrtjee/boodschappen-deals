@@ -284,7 +284,7 @@ const woordgroepen = {
     'batterij', 'gloeilamp', 'speelgoed', 'tijdschrift', 'handdoek', 'beddengoed', 'pannenset',
     'servies', 'bestek', 'boeket', 'hondenvoer', 'kattenvoer', 'kattenbakvulling', 'kattenbrokjes',
     'hondenbrokken', 'diervoeding', 'dierensnack', 'sokken', 'ondergoed', 'handzeep', 'douchegel',
-    'haarverf', 'lenzenvloeistof', 'kauwgom', 'tandenstoker', 'luiers', 'visolie', 'capsules',
+    'haarverf', 'lenzenvloeistof', 'kauwgom', 'tandenstoker', 'luiers', 'visolie', 'visoliecapsules',
     'wasgel', 'reiniger', 'toiletblok', 'lucifers', 'kaars', 'kookpan', '=jumbone'
   ]
 };
