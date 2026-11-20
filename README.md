@@ -65,10 +65,19 @@ verschillende betekenissen, dus die worden eerst op één noemer gebracht:
 Zonder die stap zet je € 3,50 naast een doorgestreepte € 9,99, en dat klopt niet.
 Het zit in `bepaalPrijzen` in `lib/score.js`.
 
-**Kilo- en literprijs.** De eenheid (`500 g`, `2 x 200 g`, `6 x 33 cl`) wordt
-ontleed, zodat een grote zak niet automatisch als voordeliger telt. AH vult
+Bij bundels zijn de kolommen niet betrouwbaar: PLUS zet bij "3 voor 5.00" soms
+de bundelprijs in `prijs_nu` en soms de schapprijs van één stuk, en ALDI zet bij
+een kale "2 VOOR" de bundelprijs erin. Daarom rekent de site de stuksprijs uit het
+bedrag in het label (5,00 / 3). Zonder bedrag in het label wordt aangenomen dat
+`prijs_nu` de hele bundel is. Ook "50% korting op de 2e" (25 procent),
+"3 halen 2 betalen", een kale "1+1" en "2e voor 1 euro" worden herkend.
+
+**Kilo- en literprijs.** De eenheid (`500 g`, `2 x 200 g`, `6 x 33 cl`,
+`per kilo`) wordt ontleed, zodat een grote zak niet automatisch als voordeliger telt. AH vult
 `eenheid` meestal niet en zet de maat in de naam ("zak 500 gram"), dus als de
-kolom leeg is wordt de naam gelezen.
+kolom leeg is wordt de naam gelezen. `4 st` geeft geen kiloprijs. Het profiel
+"Gezin en voorraad" weegt de inhoud van de verpakking mee: 2 kilo of 3 liter telt
+als een groot pak.
 
 **Het actielabel als extra kortingsbron.** Een deel van de acties komt binnen als
 `deal_type = 'overig'` zonder kortingsfactor, terwijl in het label staat wat de
@@ -498,9 +507,17 @@ daarom in `.gitignore`. Genereer hem uit je eigen export met
   meting. Wil je echte macro's, dan is een extra bron nodig, bijvoorbeeld de
   productdetail-API van AH per artikel. Dat is een flinke uitbreiding van de
   scrape.
-- **Dieetfilters zijn een schatting.** Ze werken op productnamen. Een pizza
-  margherita wordt niet als zuivelhoudend herkend, want er staat geen kaas in de
-  naam. Daarom staat die waarschuwing ook in de zijbalk van de site.
+- **Dieetfilters zijn een schatting, maar kiezen de veilige kant.** Ze werken op
+  de productnaam en de winkelcategorie (`lib/classify.js`). De dieetsignalen
+  staan los van de categorie in de UI: een "Salami snack" is snoep én vlees.
+  Samengestelde producten zonder vegetarisch label (maaltijden, pizza's, soepen,
+  "shared dining") tellen als onzeker en vallen buiten de dieetfilters op vlees.
+  Vlees waarvan de soort niet in de naam staat, telt als mogelijk varkensvlees.
+  Veganistisch weert ook snoep, koek en chocolade zonder vegan-label, want daar zit
+  vaak melk, ei of gelatine in. Een filter laat dus soms iets te veel weg, maar
+  hoort geen vlees door te laten. Jumbo (geen categorie) en Lidl (alleen "Food")
+  leunen volledig op de naam. Gelatine in snoep wordt bij vegetarisch niet herkend.
+  Daarom staat de waarschuwing ook in de zijbalk van de site.
 - **Jumbo levert geen prijzen.** De HTML-scrape haalt daar alleen actielabels op
   ("1+1 gratis"). Die producten hebben dus geen stuksprijs en kunnen niet op prijs
   of kiloprijs gesorteerd worden; ze tonen het label in plaats van een bedrag.

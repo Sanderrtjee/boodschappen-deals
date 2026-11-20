@@ -167,3 +167,10 @@ test('live dataset: geen bekend vlees onder vegetarisch', () => {
     .map((r) => r.winkel + ': ' + r.naam);
   assert.deepEqual(fout, []);
 });
+
+test('merknamen en speelgoed', () => {
+  assert.notEqual(k('Alle Duyvis 175-275 gram', 'Borrel, chips, snacks').hoofdcategorie, 'Vis');
+  assert.equal(k('Alle Duyvis 175-275 gram').bevat_vis, false);
+  assert.equal(k('Doorables knuffel', 'Sintassortiment ').is_snoep, false);
+  assert.equal(k("Pim's of scholiertje").bevat_vis, false);
+});

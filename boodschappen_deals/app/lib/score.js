@@ -25,6 +25,10 @@ function parseEenheid(eenheid) {
   if (!eenheid) return null;
   const t = String(eenheid).toLowerCase().replace(/,/g, '.');
 
+  // "per kilo" en "per liter": de prijs geldt al per kilo of per liter.
+  const per = t.match(/\bper\s*(kg|kilo|liter|ltr|l)\b/);
+  if (per) return { soort: eenheidFactoren[per[1]].soort, basis: 1000 };
+
   // Meervoudige verpakkingen: "2 x 200 g", "6 x 33 cl"
   const multi = t.match(/(\d+(?:\.\d+)?)\s*[x*]\s*(\d+(?:\.\d+)?)\s*(kg|kilo|gram|gr|g|liter|ltr|l|ml|cl|dl)\b/);
   if (multi) {
@@ -42,7 +46,17 @@ function parseEenheid(eenheid) {
     const f = eenheidFactoren[enkel[2]];
     if (f) return { soort: f.soort, basis: parseFloat(enkel[1]) * f.naar_basis };
   }
+
+  // "4 st" en "6 stuks". Daar hoort geen kiloprijs bij, maar het aantal is wel nuttig.
+  const stuks = t.match(/(\d+)\s*(?:st|stk|stuk|stuks)\b/);
+  if (stuks && parseInt(stuks[1], 10) > 0) return { soort: 'stuks', basis: parseInt(stuks[1], 10) };
   return null;
+}
+
+// Eerst de eenheid, dan de naam, en gewicht of volume gaat voor stuks.
+function bepaalInhoud(rij) {
+  const kandidaten = [parseEenheid(rij.eenheid), parseEenheid(rij.naam)].filter(Boolean);
+  return kandidaten.find((k) => k.soort !== 'stuks') || null;
 }
 
 // Postgres levert een DATE-kolom als Date-object; de rest van de app wil
@@ -73,10 +87,29 @@ function naarDatum(waarde) {
 
 function uitLabel(labelTekst) {
   if (!labelTekst) return null;
-  const t = String(labelTekst).toLowerCase().replace(/,/g, '.').trim();
+  const t = String(labelTekst).toLowerCase().replace(/,/g, '.').replace(/\s+/g, ' ').trim();
 
-  // "1+1 gratis", "2+1 gratis"
-  let m = t.match(/(\d+)\s*\+\s*(\d+)\s*gratis/);
+  // "50% korting op de 2e": alleen het tweede stuk is afgeprijsd, dus over
+  // twee stuks is dat 25 procent.
+  let m = t.match(/(\d+)\s*%\s*korting\s+op\s+(?:de\s+|het\s+)?(\d+)\s*(?:e|de|ste)\b/);
+  if (m) {
+    const pct = parseInt(m[1], 10);
+    const n = parseInt(m[2], 10);
+    if (pct > 0 && pct <= 100 && n >= 2) return { factor: pct / 100 / n, aantal: n, toepassen: true };
+  }
+
+  // "3 halen 2 betalen"
+  m = t.match(/(\d+)\s*halen\s*,?\s*(\d+)\s*betalen/);
+  if (m) {
+    const halen = parseInt(m[1], 10);
+    const betalen = parseInt(m[2], 10);
+    if (halen > betalen && betalen > 0) {
+      return { factor: (halen - betalen) / halen, aantal: halen, toepassen: true };
+    }
+  }
+
+  // "1+1 gratis", "2+1 gratis" en een kale "1+1"
+  m = t.match(/(\d+)\s*\+\s*(\d+)(?!\s*%)/);
   if (m) {
     const koop = parseInt(m[1], 10);
     const gratis = parseInt(m[2], 10);
@@ -99,11 +132,22 @@ function uitLabel(labelTekst) {
     if (n >= 2) return { factor: 0.5 / n, aantal: n, toepassen: true };
   }
 
-  // "n voor 6.99": de scraper heeft de stuksprijs al uitgerekend.
-  m = t.match(/(\d+)\s*voor/);
+  // "2e voor 1 euro": het laatste stuk kost een vast bedrag. De korting hangt
+  // af van de schapprijs, dus die rekent bepaalPrijzen uit.
+  m = t.match(/(\d+)\s*(?:e|de|ste)\s+voor\s+(?:€\s*)?(\d+(?:\.\d+)?)/);
   if (m) {
     const n = parseInt(m[1], 10);
-    if (n >= 1) return { factor: null, aantal: n, toepassen: false };
+    const bedrag = parseFloat(m[2]);
+    if (n >= 2 && bedrag >= 0) return { factor: null, aantal: n, toepassen: false, laatsteVoor: bedrag };
+  }
+
+  // "2 voor 6.99" en een kale "2 VOOR" (ALDI). Alleen met een bedrag erachter
+  // of aan het eind, zodat "1 voordeelpak" geen bundel van 1 wordt.
+  m = t.match(/(\d+)\s*voor\s+(?:€\s*)?(\d+(?:\.\d+)?)/) || t.match(/(\d+)\s*voor$/);
+  if (m) {
+    const n = parseInt(m[1], 10);
+    const bedrag = m[2] !== undefined ? parseFloat(m[2]) : null;
+    if (n >= 1) return { factor: null, aantal: n, toepassen: false, bundelprijs: bedrag > 0 ? bedrag : null };
   }
 
   // "30% korting" (AH) en "-25%" (Lidl): prijs is al verlaagd.
@@ -141,12 +185,11 @@ function bepaalKorting(rij, label, prijzen) {
   if (
     prijzen &&
     prijzen.toegepast &&
-    Number.isFinite(was) &&
-    was > 0 &&
+    prijzen.referentie > 0 &&
     prijzen.effectief > 0 &&
-    prijzen.effectief < was
+    prijzen.effectief < prijzen.referentie
   ) {
-    pct = (1 - prijzen.effectief / was) * 100;
+    pct = (1 - prijzen.effectief / prijzen.referentie) * 100;
     bron = 'effectieve prijs';
   } else if (Number.isFinite(factor) && factor > 0 && factor < 1) {
     pct = factor * 100;
@@ -194,6 +237,43 @@ function bepaalPrijzen(rij, aantalStuks, perStuk, nu, label) {
   const geldig = (v) => (Number.isFinite(v) && v > 0 ? v : null);
   const was = geldig(Number(rij.prijs_was));
   const eenheidsprijs = geldig(perStuk) ?? geldig(nu);
+
+  // "2e voor 1 euro": n-1 stuks tegen de schapprijs plus één vast bedrag.
+  if (label && label.laatsteVoor !== undefined && eenheidsprijs && label.aantal >= 2) {
+    const n = label.aantal;
+    const effectief = ((n - 1) * eenheidsprijs + label.laatsteVoor) / n;
+    if (effectief < eenheidsprijs) {
+      return { effectief, referentie: was && was > eenheidsprijs ? was : eenheidsprijs, toegepast: true };
+    }
+  }
+
+  // Bundels: de scrapers vullen de kolommen niet consequent. PLUS zet bij
+  // "3 voor 5.00" soms de bundelprijs in prijs_nu en prijs_per_stuk en soms de
+  // schapprijs van één stuk; ALDI zet bij een kale "2 VOOR" de bundelprijs
+  // erin. Het bedrag in het label zelf is de enige betrouwbare bron.
+  if (label && label.aantal >= 2 && (label.bundelprijs || rij.deal_type === 'bundel')) {
+    const n = label.aantal;
+    const nuGeldig = geldig(nu);
+    let effectief;
+    if (label.bundelprijs) {
+      effectief = label.bundelprijs / n;
+    } else if (nuGeldig && (!geldig(perStuk) || Math.abs(perStuk - nuGeldig) < 0.005)) {
+      // Kale "2 VOOR" zonder bedrag: aangenomen dat prijs_nu de hele bundel is.
+      effectief = nuGeldig / n;
+    } else {
+      effectief = eenheidsprijs;
+    }
+
+    let referentie = null;
+    if (was && label.bundelprijs && was >= label.bundelprijs * 0.98) referentie = was / n;
+    else if (was && !label.bundelprijs && rij.deal_type === 'bundel') referentie = was / n;
+    else if (was && was > effectief) referentie = was;
+    else if (nuGeldig && nuGeldig > effectief * 1.005 && (!label.bundelprijs || nuGeldig < label.bundelprijs)) {
+      // prijs_nu is hier de gewone prijs van één stuk.
+      referentie = nuGeldig;
+    }
+    return { effectief, referentie, toegepast: Boolean(referentie && referentie > effectief) };
+  }
 
   if (rij.deal_type === 'bundel') {
     return {
@@ -243,7 +323,7 @@ function verrijk(rij) {
   // AH levert `eenheid` meestal als lege string en zet de maat in de naam
   // ("AH Sweet Palermo rode puntpaprika zak 500 gram"). Zonder deze terugval
   // heeft geen enkel AH-product een kiloprijs.
-  const eenheidInfo = parseEenheid(rij.eenheid) || parseEenheid(rij.naam);
+  const eenheidInfo = bepaalInhoud(rij);
   let basisprijs = null; // prijs per kg of per liter
   if (eenheidInfo && stuksprijs) {
     const perBasis = stuksprijs / eenheidInfo.basis; // per gram of per ml
@@ -285,6 +365,7 @@ function verrijk(rij) {
       ? prijzen.referentie
       : null,
     basisprijs,
+    inhoud: eenheidInfo,
     aantal_stuks: aantalStuks,
     korting_pct: korting.pct,
     korting_hard: korting.hard,
@@ -336,7 +417,7 @@ const PROFIELEN = {
     naam: 'Gezin en voorraad',
     omschrijving: 'Grote pakken en meerstuks-acties waar je een week op vooruit kunt.',
     icoon: 'users',
-    gewichten: { korting: 0.45, goedkoop: 0.22, eiwit: 0.16, gemak: 0.17 },
+    gewichten: { korting: 0.40, goedkoop: 0.18, eiwit: 0.14, gemak: 0.16, bulk: 0.12 },
     straf: { snoep: 0.7, alcohol: 0.6, nonfood: 0.9 }
   },
   gemak: {
@@ -374,14 +455,16 @@ const DIEETEN = {
 function dieetToegestaan(item, dieet) {
   const k = item.kenmerken;
   switch (dieet) {
+    // dieet_onzeker: een samengesteld product zonder vegetarisch label. Daar
+    // kan vlees in zitten, dus het valt buiten elk dieetfilter op vlees.
     case 'vegetarisch':
-      return !k.bevat_vlees && !k.bevat_vis;
+      return !k.bevat_vlees && !k.bevat_vis && !k.dieet_onzeker;
     case 'veganistisch':
-      return !k.bevat_dierlijk;
+      return !k.bevat_dierlijk && !k.dieet_onzeker && !k.vegan_onzeker;
     case 'pescotarisch':
-      return !k.bevat_vlees;
+      return !k.bevat_vlees && !k.dieet_onzeker;
     case 'geen_varkensvlees':
-      return !k.bevat_varken;
+      return !k.bevat_varken && !k.dieet_onzeker;
     case 'geen_alcohol':
       return !k.is_alcohol;
     default:
@@ -408,11 +491,11 @@ function kenmerkWaarden(item, huishouden) {
     goedkoop = 1 - Math.min(stuksprijs, 9) / 9;
   }
 
-  // Grote pakken zijn interessanter voor een gezin dan losse eenheden.
+  // Grote pakken zijn interessanter voor een gezin dan losse eenheden. Dat
+  // gaat om de inhoud: 2 kilo of 3 liter telt als vol, 200 gram als weinig.
   let bulk = 0;
-  if (item.basisprijs && item.basisprijs.soort === 'gewicht') {
-    bulk = Math.min((item.basisprijs.prijs > 0 ? item.stuksprijs : 0) / 8, 1);
-  }
+  if (item.inhoud && item.inhoud.soort === 'gewicht') bulk = Math.min(item.inhoud.basis / 2000, 1);
+  if (item.inhoud && item.inhoud.soort === 'volume') bulk = Math.min(item.inhoud.basis / 3000, 1);
   if (item.aantal_stuks >= 2) bulk = Math.max(bulk, 0.6);
 
   return {
@@ -423,7 +506,7 @@ function kenmerkWaarden(item, huishouden) {
     gemak: k.is_gemak ? 1 : 0,
     plant: k.is_plantaardig ? 1 : (item.categorie === 'Groente en fruit' ? 0.85 : 0),
     borrel: k.is_alcohol || k.is_snoep ? 1 : 0,
-    bulk: huishouden >= 3 ? bulk : 0
+    bulk
   };
 }
 
@@ -437,6 +520,8 @@ function scoreVoor(item, opties) {
   for (const [kenmerk, gewicht] of Object.entries(w)) {
     score += gewicht * (f[kenmerk] || 0);
   }
+  // Profielen zonder eigen bulkgewicht krijgen bij een groot huishouden een
+  // klein extraatje voor grote pakken.
   if (w.bulk === undefined && huishouden >= 3) score += 0.05 * f.bulk;
 
   // Straffen, multiplicatief zodat een profiel iets echt kan wegdrukken.
@@ -492,6 +577,7 @@ module.exports = {
   redenen,
   dieetToegestaan,
   parseEenheid,
+  bepaalInhoud,
   PROFIELEN,
   DIEETEN
 };
