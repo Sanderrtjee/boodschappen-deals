@@ -64,8 +64,47 @@ CREATE INDEX IF NOT EXISTS idx_products_winkel ON products (winkel);
 --   WHERE grantee = 'boodschappen_web';
 
 -- ---------------------------------------------------------------------------
--- Opruimen: oude scrapes hebben na een paar maanden geen waarde meer.
--- Zet dit desgewenst als losse n8n-node op een maandelijkse planning.
+-- VOORSTEL retentie (20-11-2026, nog niet uitgevoerd)
+--
+-- Waarom: de site zoekt per winkel de laatste scrape_datum op met een
+-- GROUP BY over álle offers (lib/db.js). Zonder opruimen groeit die tabel
+-- met zo'n 500 rijen per run, twee runs per week, en wordt die query
+-- langzamer. De site kijkt nooit verder terug dan 21 dagen (scrapehistorie),
+-- de weekbrief ook niet.
+--
+-- Wat: offers ouder dan 120 dagen weg, en daarna producten die nergens
+-- meer naar verwijzen en ouder zijn dan 180 dagen. Selecties van de
+-- assistent verwijzen alleen naar producten uit de actuele week, die blijven
+-- dus staan.
+--
+-- Hoe: als losse Postgres-node in n8n, maandelijks, met de credential die
+-- nu ook schrijft. De leesgebruiker boodschappen_web kan dit niet en hoort
+-- dat ook niet te kunnen. Raakt alleen products en offers, geen
+-- Nextcloud-tabellen. Eerst de tellingen draaien, dan pas de DELETE.
 -- ---------------------------------------------------------------------------
 
--- DELETE FROM offers WHERE scrape_datum < CURRENT_DATE - INTERVAL '120 days';
+-- Stap 1, alleen lezen: hoeveel zou er weg gaan?
+-- SELECT COUNT(*) AS oude_offers
+-- FROM public.offers
+-- WHERE scrape_datum < CURRENT_DATE - INTERVAL '120 days';
+--
+-- SELECT COUNT(*) AS wees_producten
+-- FROM public.products p
+-- WHERE p.aangemaakt < now() - INTERVAL '180 days'
+--   AND NOT EXISTS (SELECT 1 FROM public.offers o WHERE o.product_id = p.product_id);
+
+-- Stap 2, na akkoord, in één transactie:
+-- BEGIN;
+-- DELETE FROM public.offers
+-- WHERE scrape_datum < CURRENT_DATE - INTERVAL '120 days';
+-- DELETE FROM public.products p
+-- WHERE p.aangemaakt < now() - INTERVAL '180 days'
+--   AND NOT EXISTS (SELECT 1 FROM public.offers o WHERE o.product_id = p.product_id);
+-- COMMIT;
+
+-- VOORSTEL index (ook nog niet uitgevoerd): de laatste datum per winkel komt
+-- uit een join van offers op products. Met deze index hoeft Postgres per
+-- product alleen de nieuwste scrape te lezen. CONCURRENTLY blokkeert de
+-- n8n-upsert niet; kan niet binnen een transactie.
+-- CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_offers_product_datum
+--   ON public.offers (product_id, scrape_datum DESC);

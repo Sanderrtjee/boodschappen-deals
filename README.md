@@ -1,7 +1,7 @@
 # Boodschappen Deals
 
-Een zelf gehoste website die de weekaanbiedingen van Albert Heijn, Jumbo en Lidl
-op één plek zet en rangschikt op het profiel van de bezoeker. Iedereen die de
+Een zelf gehoste website die de weekaanbiedingen van Albert Heijn, Jumbo, Lidl,
+ALDI en PLUS op één plek zet en rangschikt op het profiel van de bezoeker. Iedereen die de
 link opent kiest zelf zijn winkels, dieet en huishoudgrootte, en ziet daar een
 eigen top van aanbiedingen bij. Alles in het Nederlands.
 
@@ -431,12 +431,13 @@ non-food. Voeg je er een toe, dan verschijnt hij automatisch in de profielkiezer
 kies een `icoon` uit `sparkles`, `dumbbell`, `leaf`, `wallet`, `users`, `clock`,
 `sprout`, `glass`, `cart` of `kok`.
 
-**Een winkel toevoegen.** De site is niet aan drie winkels gebonden. Zodra je
-n8n-flow een vierde winkel in `products.winkel` schrijft (Plus, Aldi, Dirk),
-verschijnt die automatisch als filter met het juiste aantal erbij. Wil je hem een
-eigen kleur geven, voeg die dan toe in `public/app.js` bij `WINKELKLEUREN` en in
-`styles.css` bij de `--plus` / `--aldi`-variabelen; voor Plus en Aldi staat dat er
-al in.
+**Een winkel toevoegen.** De site is niet aan een vast aantal winkels gebonden;
+live zijn het er vijf. Zodra je n8n-flow een nieuwe winkel in `products.winkel`
+schrijft (bijvoorbeeld Dirk), verschijnt die automatisch als filter met het
+juiste aantal erbij. Wil je hem een eigen kleur geven, voeg die dan toe in
+`public/app.js` bij `WINKELKLEUREN`, in `styles.css` als variabele en bij de
+`.winkelbadge[data-winkel=...]`-regels. Let op de spelling zoals hij in de data
+staat: `PLUS` en `ALDI` in hoofdletters.
 
 **De productclassificatie verbeteren.** `lib/classify.js` bevat woordgroepen en
 categoriehints. Zie je een product met een verkeerd label, dan is dat vrijwel
