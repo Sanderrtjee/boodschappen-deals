@@ -9,9 +9,12 @@
 > sticky note in de workflow: het IP van je Home Assistant in de twee
 > `Stuur ... naar site`-nodes, en een Header Auth-credential met je importtoken.
 >
-> Het script dat de wijzigingen heeft gemaakt staat ernaast als
-> [patch-workflow.js](patch-workflow.js), zodat je kunt zien wat er precies
-> veranderd is en het opnieuw kunt toepassen op een nieuwere export.
+> **Let op (november 2026):** de live workflow is sindsdien verder gegaan
+> (vijf winkels, ALDI en PLUS erbij). Het script `patch-workflow.js` dat deze
+> wijzigingen ooit maakte, is daarom verwijderd: het ging uit van een oudere
+> export en schreef zijn uitvoer weg vóór de foutcontrole. De bron van waarheid
+> is de workflow in n8n zelf. Exporteer die vóór elke wijziging. Deze pagina
+> beschrijft het idee achter de koppeling, niet meer de exacte stand.
 
 
 De website leest **rechtstreeks uit dezelfde Postgres-database** die je flow al

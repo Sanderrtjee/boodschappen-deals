@@ -497,7 +497,6 @@ boodschappen-deals/
 ├── KOPPELEN.md                  de twee koppelingen met n8n, met controlestappen
 ├── n8n/README.md                wat je in de flow aanpast
 ├── n8n/SELECTIES.md             de twee Gemini-takken met prompts en nodes
-├── n8n/patch-workflow.js        script dat die wijzigingen toepast op een export
 ├── sql/schema.sql               tabellen, indexen, leesgebruiker
 ├── repository.yaml              zodat dit als add-on repository kan dienen
 ├── docker-compose.yml           alleen voor draaien buiten Home Assistant
@@ -506,8 +505,9 @@ boodschappen-deals/
 
 De aangepaste n8n-workflow staat bewust **niet** in de repo: die bevat de
 e-mailadressen van de ontvangers van de weekbrief. `n8n/workflow-*.json` staat
-daarom in `.gitignore`. Genereer hem uit je eigen export met
-`n8n/patch-workflow.js`.
+daarom in `.gitignore`. De bron van waarheid is de workflow in n8n zelf;
+exporteer die vóór elke wijziging. Het oude `n8n/patch-workflow.js` is
+verwijderd, omdat de live workflow er te ver van afweek.
 
 ## Beperkingen, eerlijk opgeschreven
 

@@ -4,7 +4,7 @@
   "description": "Alleen voor tests en controles. De add-on zelf staat in boodschappen_deals/app en komt niet uit deze map.",
   "scripts": {
     "test": "node --test tests/*.test.js",
-    "check": "for f in boodschappen_deals/app/server.js boodschappen_deals/app/lib/*.js boodschappen_deals/app/public/app.js n8n/*.js tests/*.js; do node --check \"$f\" || exit 1; done"
+    "check": "for f in boodschappen_deals/app/server.js boodschappen_deals/app/lib/*.js boodschappen_deals/app/public/app.js tests/*.js; do node --check \"$f\" || exit 1; done"
   },
   "engines": {
     "node": ">=22"

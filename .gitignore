@@ -9,6 +9,5 @@ npm-debug.log
 data/
 
 # De aangepaste n8n-workflow blijft lokaal. Die bevat de e-mailadressen van de
-# ontvangers van de weekbrief, en die horen niet in een publieke repo. Genereer
-# hem zelf uit je eigen export met n8n/patch-workflow.js.
+# ontvangers van de weekbrief, en die horen niet in een publieke repo.
 n8n/workflow-*.json
