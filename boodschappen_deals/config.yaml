@@ -47,3 +47,5 @@ schema:
   site_titel: str
   cache_minuten: int(1,1440)
   import_token: password?
+  import_publiek: bool?
+  vertrouwde_proxies: str?

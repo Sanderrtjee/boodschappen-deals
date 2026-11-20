@@ -118,7 +118,7 @@ Assistant, dus:
 | --- | --- |
 | Als add-on op dezelfde Home Assistant | `http://192.168.1.10:8499` (het LAN-IP van HA). Ook `http://local-boodschappen-deals:8499` werkt, mits die naam bij jou resolvet; het IP is zekerder. |
 | In Docker op een NAS of NUC in hetzelfde netwerk | `http://192.168.1.10:8499` |
-| Buiten je netwerk, bijvoorbeeld n8n Cloud | `https://boodschappen.jouwdomein.nl` via je Cloudflare-tunnel |
+| Buiten je netwerk, bijvoorbeeld n8n Cloud | `https://boodschappen.jouwdomein.nl` via je Cloudflare-tunnel. Zet dan wel `import_publiek` aan in de add-on: standaard weigeren de import-endpoints alles wat via Cloudflare binnenkomt. |
 
 Gebruik een **vast IP** voor je Home Assistant, of een DHCP-reservering. Anders
 werkt de koppeling tot je router een ander adres uitdeelt.

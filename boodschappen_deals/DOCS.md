@@ -27,7 +27,9 @@ drie puntjes → *Rebuild*.
 | `db_ssl` | Aanzetten als je database SSL vereist. |
 | `site_titel` | Titel in de kop en de browsertab. |
 | `cache_minuten` | Hoe lang de dataset in het geheugen blijft (1–1440). |
-| `import_token` | Zelf verzonnen geheim voor `/api/import/recepten` en `/api/verversen`. Leeg laten schakelt die endpoints uit. |
+| `import_token` | Zelf verzonnen geheim voor `/api/import/*` en `/api/verversen`. Leeg laten schakelt die endpoints uit. Gebruik minstens 32 willekeurige tekens. |
+| `import_publiek` | Optioneel, standaard uit. Uit betekent: verzoeken die via Cloudflare binnenkomen, krijgen op de import-endpoints een 404. Alleen aanzetten als n8n buiten je LAN draait. |
+| `vertrouwde_proxies` | Optioneel. IP-adressen (komma-gescheiden) waarvan de header `cf-connecting-ip` geloofd wordt. Leeg laten als je het niet weet. |
 
 ## Gebruiken
 
@@ -62,6 +64,24 @@ info: Dataset geladen: 312 aanbiedingen
 
 Staat er `(demodata)` achter en zie je in de site een gele balk, dan is de
 database niet bereikbaar of nog leeg. De balk zelf noemt de reden.
+
+## Beveiliging
+
+- **Import-endpoints.** Alleen met het token. Na vijf foute pogingen vanaf
+  hetzelfde adres binnen een kwartier geeft een fout token een `429`. Een
+  geldig token werkt altijd, zodat n8n nooit buitengesloten raakt. Via het
+  publieke domein staan deze endpoints dicht, tenzij `import_publiek` aan staat.
+  Een foutmelding zegt nooit iets over het token zelf.
+- **Headers.** Elke pagina krijgt een Content-Security-Policy zonder inline
+  scripts of stijlen, `frame-ancestors 'self'` (de ingress-iframe draait op
+  dezelfde origin als Home Assistant), `X-Frame-Options`, `nosniff` en
+  `no-referrer`. Via Cloudflare komt er ook HSTS bij.
+- **Lettertypes** staan in de add-on zelf. Er gaat geen verzoek naar Google.
+- **Foutmeldingen** naar buiten zijn algemeen. De ruwe databasefout staat in het
+  log, en in `/api/health` alleen met token vanaf het LAN (`fout_detail`).
+- **Ingress-prefix.** `/api/hassio_ingress/<x>/` wordt alleen geaccepteerd van
+  het ingress-adres van de Supervisor (`172.30.32.2`). Op het publieke domein
+  geeft dat pad een 404, zodat het geen omweg om een padregel heen is.
 
 ## Let op
 

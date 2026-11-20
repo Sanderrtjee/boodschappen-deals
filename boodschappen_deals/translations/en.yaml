@@ -26,5 +26,11 @@ configuration:
   import_token:
     name: Import token
     description: Your own secret for importing recipes from n8n and refreshing the cache. Leave empty to disable those endpoints.
+  import_publiek:
+    name: Allow import via the public domain
+    description: Off by default. The import endpoints then refuse every request that arrives through Cloudflare, so only n8n on your LAN can import. Turn on if n8n runs outside your network, for example n8n Cloud.
+  vertrouwde_proxies:
+    name: Trusted proxies
+    description: Comma-separated IP addresses whose cf-connecting-ip header is trusted, such as the address cloudflared uses to reach the add-on. Leave empty if unsure; the direct address is used then.
 network:
   8499/tcp: Web interface, this is the port you route through a Cloudflare tunnel

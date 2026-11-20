@@ -1,0 +1,25 @@
+/* Zelf gehoste lettertypes. Geen Google Fonts meer: dat stuurde het IP-adres
+   van elke bezoeker naar Google, en de build heeft geen netwerk. Variabele
+   fonts, alleen de latin-subset (dekt ook é, ë en het euroteken).
+   Licentie: SIL Open Font License 1.1, zie de OFL-bestanden in deze map. */
+@font-face {
+  font-family: 'Urbanist';
+  font-style: normal;
+  font-weight: 500 800;
+  font-display: swap;
+  src: url(urbanist-latin.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url(manrope-latin.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url(jetbrainsmono-latin.woff2) format('woff2');
+}

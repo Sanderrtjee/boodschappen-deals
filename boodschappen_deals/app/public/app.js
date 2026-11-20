@@ -399,7 +399,9 @@ function kaartHtml(d) {
     '<div class="kaart-beeld">' + beeld + '</div>' +
     '<div class="kaart-hoofd">' +
     '<div class="kaart-winkelrij">' +
-    '<span class="winkelbadge" style="--kleur:' + (WINKELKLEUREN[d.winkel] || 'var(--tekst-stil)') + '">' +
+    // Geen style-attribuut: de CSP staat geen inline stijlen toe. De kleur
+    // komt uit styles.css op basis van data-winkel.
+    '<span class="winkelbadge" data-winkel="' + ontsnap(d.winkel) + '">' +
     ontsnap(d.winkel) + '</span>' +
     (d.label ? '<span class="dealbadge">' + ontsnap(d.label) + '</span>' : '') +
     '</div>' +

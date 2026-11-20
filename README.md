@@ -380,8 +380,11 @@ Buiten Home Assistant zijn s6 en bashio overbodig, dus compose gebruikt
 | Container start niet, onduidelijke shebang-fout | `run.sh` met CRLF. `.gitattributes` dwingt LF af; controleer met `git ls-files --eol boodschappen_deals/run.sh`. |
 
 Voor diepere diagnose: `GET /api/health` **met** je importtoken geeft de
-verbindingsgegevens, het aantal producten per winkel en de ingestuurde selecties
-terug. Zonder token blijft dat weg, want dat endpoint is publiek.
+verbindingsgegevens, de ruwe databasefout (`fout_detail`), het aantal producten
+per winkel en de ingestuurde selecties terug. Zonder token, of via het publieke
+domein, blijft dat weg. Zie `boodschappen_deals/DOCS.md` onder *Beveiliging*
+voor de limiet op foute tokens en waarom de import-endpoints via Cloudflare
+dichtstaan.
 
 ## Endpoints
 
@@ -395,6 +398,10 @@ terug. Zonder token blijft dat weg, want dat endpoint is publiek.
 | `DELETE /api/import/selectie/<sleutel>` | Zo'n selectie weghalen. Zelfde token. |
 | `POST /api/import/recepten` | Losse recepten opslaan. Zelfde token. |
 | `POST /api/verversen` | Cache leeggooien en direct opnieuw uit de database lezen. Zelfde token. |
+
+De import-endpoints en `/api/verversen` geven via het publieke domein een `404`,
+tenzij `import_publiek` aan staat. Na vijf foute tokens binnen een kwartier
+geeft een fout token een `429`; een geldig token werkt altijd.
 
 Parameters van `/api/deals`:
 

@@ -12,6 +12,9 @@ const { Database } = require('./lib/db');
 const { demoRijen } = require('./lib/demo');
 const { Selecties } = require('./lib/selecties');
 const score = require('./lib/score');
+const { maakDataset } = require('./lib/dataset');
+const { schrijfAtomisch } = require('./lib/bestand');
+const beveiliging = require('./lib/beveiliging');
 
 // ---------------------------------------------------------------------------
 // Configuratie
@@ -40,67 +43,20 @@ const db = new Database(config.db, log);
 const selecties = new Selecties(dataDir, log);
 
 // ---------------------------------------------------------------------------
-// Cache: de dataset verandert maar een paar keer per dag, dus we houden de
-// verrijkte rijen in het geheugen en scoren per verzoek. Dat is ruim snel
-// genoeg voor een paar honderd aanbiedingen.
+// Dataset. Demodata alleen als er helemaal geen database is ingesteld. Is er
+// wel een database maar hapert die, dan tonen we niets in plaats van verzonnen
+// aanbiedingen: op een publieke site is nepdata erger dan een lege pagina.
 // ---------------------------------------------------------------------------
 
-const cache = {
-  items: null,
-  geldigTot: 0,
-  demo: false,
-  fout: null,
-  runs: [],
-  bezig: null
-};
-
-// Na een fout willen we het snel opnieuw proberen. Een database die even weg is
-// omdat hij herstart, moet niet een kwartier lang een lege site opleveren.
-const HERKANSING_MS = 60000;
-
-async function haalDataset(forceer) {
-  if (!forceer && cache.items && Date.now() < cache.geldigTot) return cache;
-  if (cache.bezig) return cache.bezig;
-
-  cache.bezig = (async () => {
-    let rijen = null;
-    let fout = null;
-
-    // Demodata alleen als er helemaal geen database is ingesteld. Is er wel een
-    // database maar hapert die, dan tonen we niets in plaats van verzonnen
-    // aanbiedingen: op een publieke site is nepdata erger dan een lege pagina.
-    const demoModus = config.demoAf || !db.beschikbaar;
-
-    if (!demoModus) {
-      try {
-        rijen = await db.aanbiedingen();
-        cache.runs = await db.runs();
-        if (rijen.length === 0) {
-          fout = 'De database is bereikbaar maar bevat geen actuele aanbiedingen. Heeft de n8n-flow al gelopen?';
-        }
-      } catch (e) {
-        fout = 'De database is niet bereikbaar: ' + e.message;
-        log('fout', fout);
-        rijen = [];
-      }
-    } else {
-      rijen = demoRijen();
-    }
-
-    cache.demo = demoModus;
-    cache.items = rijen.map(score.verrijk).filter((i) => i.naam);
-    cache.fout = fout;
-    cache.geldigTot = Date.now() + (fout ? HERKANSING_MS : config.cacheMinuten * 60000);
-    log(
-      fout ? 'waarschuwing' : 'info',
-      'Dataset geladen: ' + cache.items.length + ' aanbiedingen' + (demoModus ? ' (demodata)' : '')
-    );
-    cache.bezig = null;
-    return cache;
-  })();
-
-  return cache.bezig;
-}
+const dataset = maakDataset({
+  db,
+  demoModus: () => config.demoAf || !db.beschikbaar,
+  demoRijen,
+  verrijk: score.verrijk,
+  cacheMinuten: config.cacheMinuten,
+  log
+});
+const haalDataset = dataset.haal;
 
 // ---------------------------------------------------------------------------
 // Filteren, scoren en sorteren
@@ -249,7 +205,9 @@ const mimeTypes = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.ico': 'image/x-icon',
-  '.webmanifest': 'application/manifest+json'
+  '.webmanifest': 'application/manifest+json',
+  '.woff2': 'font/woff2',
+  '.txt': 'text/plain; charset=utf-8'
 };
 
 const publicDir = path.join(__dirname, 'public');
@@ -322,7 +280,8 @@ function leesBody(req, maxBytes) {
 // Geeft niet alleen goed of fout terug maar ook waaróm. Een 401 met alleen
 // "ongeldig of ontbrekend token" laat je zoeken tussen een leeg tokenveld, een
 // vergeten herstart en een Authorization-header zonder "Bearer " ervoor.
-// Die drie zijn hier van elkaar te onderscheiden.
+// Die drie zijn hier van elkaar te onderscheiden. Over het token zelf zegt de
+// melding niets, ook niet hoe lang het is.
 function tokenControle(req) {
   const kop = String(req.headers.authorization || '');
   const los = String(req.headers['x-import-token'] || '').trim();
@@ -330,6 +289,7 @@ function tokenControle(req) {
   if (!config.importToken) {
     return {
       ok: false,
+      meegestuurd: Boolean(kop || los),
       fout:
         'Deze add-on heeft geen import_token ingesteld, dus de import-endpoints staan uit. ' +
         'Vul het veld Import token in bij de add-on-configuratie en herstart de add-on.'
@@ -339,6 +299,7 @@ function tokenControle(req) {
   if (!kop && !los) {
     return {
       ok: false,
+      meegestuurd: false,
       fout:
         'Geen token meegestuurd. Stuur een header Authorization met de waarde ' +
         '"Bearer <token>", of een header X-Import-Token met alleen het token.'
@@ -348,6 +309,7 @@ function tokenControle(req) {
   if (kop && !kop.startsWith('Bearer ')) {
     return {
       ok: false,
+      meegestuurd: true,
       fout:
         'De Authorization-header moet met "Bearer " beginnen, met een spatie erna. ' +
         'Gebruik je in n8n een Header Auth-credential, zet de Value dan op ' +
@@ -356,18 +318,64 @@ function tokenControle(req) {
   }
 
   const bearer = kop.startsWith('Bearer ') ? kop.slice(7).trim() : '';
-  if (bearer === config.importToken || los === config.importToken) return { ok: true };
+  // Beide altijd vergelijken, zodat de looptijd niet verraadt welke header er was.
+  const okBearer = beveiliging.tokenGelijk(bearer, config.importToken);
+  const okLos = beveiliging.tokenGelijk(los, config.importToken);
+  if (okBearer || okLos) return { ok: true };
 
   return {
     ok: false,
+    meegestuurd: true,
     fout:
       'Het token klopt niet. Het moet exact gelijk zijn aan het veld Import token ' +
-      'in de add-on-configuratie (' + config.importToken.length + ' tekens).'
+      'in de add-on-configuratie.'
   };
 }
 
-function tokenGeldig(req) {
-  return tokenControle(req).ok;
+// Mislukte pogingen per adres. Een geldig token gaat altijd voor, ook tijdens
+// een blokkade: n8n mag nooit buitengesloten raken doordat iemand anders vanaf
+// hetzelfde adres (bijvoorbeeld de Docker-gateway) heeft zitten gokken. Wie
+// geblokkeerd is en een fout token stuurt, krijgt een 429 zonder verdere uitleg.
+// Gokken blijft daarmee mogelijk, maar het token is lang en willekeurig, en het
+// publieke domein komt hier helemaal niet (zie importToegestaan).
+const pogingen = new beveiliging.Pogingenteller({ max: 5, vensterMs: 15 * 60000 });
+
+// Voor /api/health: met een geldig token komt er meer detail terug. Een fout
+// token geeft geen 401, maar telt wel als mislukte poging, anders is health
+// een gokmachine zonder limiet.
+function tokenMetLimiet(req, adres) {
+  const check = tokenControle(req);
+  if (check.ok) return true;
+  if (check.meegestuurd && config.importToken && !pogingen.geblokkeerd(adres)) pogingen.fout(adres);
+  return false;
+}
+
+function autoriseer(req, res, adres) {
+  const check = tokenControle(req);
+  if (check.ok) return true;
+  if (pogingen.geblokkeerd(adres)) {
+    stuurTeVeel(res, adres);
+    return false;
+  }
+  if (check.meegestuurd) {
+    const n = pogingen.fout(adres);
+    log('waarschuwing', 'Fout importtoken vanaf ' + adres + ' (' + n + ' in dit venster)');
+    if (n >= pogingen.max) log('waarschuwing', 'Adres ' + adres + ' tijdelijk geblokkeerd voor de import-endpoints');
+  }
+  stuurJson(res, 401, { fout: check.fout });
+  return false;
+}
+
+function stuurTeVeel(res, adres) {
+  res.setHeader('retry-after', String(pogingen.wachtSeconden(adres)));
+  stuurJson(res, 429, { fout: 'Te veel mislukte pogingen. Probeer het later opnieuw.' });
+}
+
+// Het publieke domein heeft de import-endpoints niet nodig: n8n praat via het
+// LAN met de add-on. Verzoeken via Cloudflare krijgen daarom een 404, tenzij
+// import_publiek aan staat (bijvoorbeeld voor n8n Cloud).
+function importToegestaan(req) {
+  return config.importPubliek || !beveiliging.viaCloudflare(req);
 }
 
 // ---------------------------------------------------------------------------
@@ -550,23 +558,40 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Home Assistant ingress zet de app achter /api/hassio_ingress/<token>/.
-  // We knippen dat prefix eraf zodat de routes hieronder gelijk blijven.
+  // De Supervisor knipt het ingress-prefix er zelf al af voordat het verzoek
+  // hier aankomt. Voor de zekerheid accepteren we /api/hassio_ingress/<x>/
+  // nog wel, maar alleen van het ingress-adres van de Supervisor. Op het
+  // publieke domein zou het prefix anders een omweg om padregels heen zijn,
+  // bijvoorbeeld een Cloudflare-regel op /api/import/*.
+  const ingressVerzoek = beveiliging.viaIngress(req, config.ingressIp);
   let pad = url.pathname.replace(/\/{2,}/g, '/');
   const ingress = pad.match(/^\/api\/hassio_ingress\/[^/]+(\/.*)?$/);
-  if (ingress) pad = ingress[1] || '/';
+  if (ingress && ingressVerzoek) pad = ingress[1] || '/';
   if (pad.length > 1 && pad.endsWith('/')) pad = pad.slice(0, -1);
 
-  res.setHeader('x-content-type-options', 'nosniff');
-  res.setHeader('referrer-policy', 'no-referrer');
+  const adres = beveiliging.bezoekerAdres(req, config.vertrouwdeProxies);
+  const https = !ingressVerzoek && (
+    String(req.headers['x-forwarded-proto'] || '').toLowerCase() === 'https' ||
+    /"scheme"\s*:\s*"https"/.test(String(req.headers['cf-visitor'] || ''))
+  );
+  beveiliging.zetBeveiligingsHeaders(res, { https });
+
+  // HEAD is GET zonder body; Node laat de body bij HEAD zelf weg.
+  const methode = req.method === 'HEAD' ? 'GET' : req.method;
 
   try {
-    if (req.method === 'GET' && (pad === '/' || pad === '/index.html')) {
+    if (pad.startsWith('/api/import/') || pad === '/api/verversen') {
+      if (!importToegestaan(req)) return stuurJson(res, 404, { fout: 'Niet gevonden' });
+    }
+
+    if (methode === 'GET' && (pad === '/' || pad === '/index.html')) {
       return stuurBestand(res, 'index.html');
     }
 
-    if (req.method === 'GET' && pad === '/api/health') {
+    if (methode === 'GET' && pad === '/api/health') {
       const data = await haalDataset(false);
+      // Details alleen met token en niet via het publieke domein.
+      const metToken = importToegestaan(req) && tokenMetLimiet(req, adres);
       const antwoord = {
         status: 'ok',
         demo: data.demo,
@@ -578,7 +603,8 @@ const server = http.createServer(async (req, res) => {
       // Waar de add-on precies verbinding mee probeert te maken is het eerste
       // wat je wilt weten als het niet werkt. Maar het zijn interne
       // hostnamen, dus dat vertellen we alleen aan wie het token heeft.
-      if (tokenGeldig(req)) {
+      if (metToken) {
+        antwoord.fout_detail = data.foutDetail || null;
         antwoord.verbinding = {
           host: config.db.host || null,
           poort: config.db.port,
@@ -600,21 +626,20 @@ const server = http.createServer(async (req, res) => {
       return stuurJson(res, 200, antwoord);
     }
 
-    if (req.method === 'GET' && pad === '/api/meta') {
+    if (methode === 'GET' && pad === '/api/meta') {
       return stuurJson(res, 200, await meta());
     }
 
-    if (req.method === 'GET' && pad === '/api/deals') {
+    if (methode === 'GET' && pad === '/api/deals') {
       return stuurJson(res, 200, await deals(url.searchParams));
     }
 
-    if (req.method === 'GET' && pad === '/api/recepten') {
+    if (methode === 'GET' && pad === '/api/recepten') {
       return stuurJson(res, 200, await leesRecepten());
     }
 
     if (req.method === 'POST' && pad === '/api/import/recepten') {
-      const check = tokenControle(req);
-      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
+      if (!autoriseer(req, res, adres)) return;
       const ruw = await leesBody(req, 1024 * 512);
       let data;
       try {
@@ -627,14 +652,13 @@ const server = http.createServer(async (req, res) => {
         recepten,
         gegenereerd_op: data.gegenereerd_op || new Date().toISOString()
       };
-      await fsp.writeFile(receptenBestand, JSON.stringify(inhoud, null, 2), 'utf8');
+      await schrijfAtomisch(receptenBestand, JSON.stringify(inhoud, null, 2));
       log('info', 'Recepten ontvangen: ' + recepten.length);
       return stuurJson(res, 200, { status: 'ok', opgeslagen: recepten.length });
     }
 
     if (req.method === 'POST' && pad === '/api/import/selectie') {
-      const check = tokenControle(req);
-      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
+      if (!autoriseer(req, res, adres)) return;
       const ruw = await leesBody(req, 1024 * 512);
       let data;
       try {
@@ -657,25 +681,23 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === 'DELETE' && pad.startsWith('/api/import/selectie/')) {
-      const check = tokenControle(req);
-      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
+      if (!autoriseer(req, res, adres)) return;
       const sleutel = decodeURIComponent(pad.slice('/api/import/selectie/'.length));
       const weg = await selecties.verwijder(sleutel);
       return stuurJson(res, weg ? 200 : 404, weg ? { status: 'ok' } : { fout: 'Niet gevonden' });
     }
 
     if (req.method === 'POST' && pad === '/api/verversen') {
-      const check = tokenControle(req);
-      if (!check.ok) return stuurJson(res, 401, { fout: check.fout });
+      if (!autoriseer(req, res, adres)) return;
       const data = await haalDataset(true);
       return stuurJson(res, 200, { status: 'ok', aanbiedingen: data.items.length, demo: data.demo });
     }
 
-    if (req.method === 'GET') {
+    if (methode === 'GET') {
       return stuurBestand(res, pad.slice(1));
     }
 
-    res.writeHead(405, { 'content-type': 'text/plain; charset=utf-8' });
+    res.writeHead(405, { 'content-type': 'text/plain; charset=utf-8', allow: 'GET, HEAD' });
     res.end('Methode niet toegestaan');
   } catch (e) {
     log('fout', 'Onverwachte fout op ' + pad + ': ' + e.stack);
@@ -691,9 +713,16 @@ server.listen(config.poort, '0.0.0.0', () => {
   log(
     config.importToken ? 'info' : 'waarschuwing',
     config.importToken
-      ? 'Import-endpoints staan aan, token is ingesteld (' + config.importToken.length + ' tekens)'
+      ? 'Import-endpoints staan aan, token is ingesteld' +
+        (config.importPubliek ? ', ook via het publieke domein' : ', alleen via het LAN')
       : 'Geen import_token ingesteld: /api/import/selectie en /api/verversen geven 401'
   );
+  if (config.importToken && config.importToken.length < 24) {
+    log('waarschuwing', 'Het import_token is kort. Gebruik minstens 32 willekeurige tekens.');
+  }
+  if (config.vertrouwdeProxies.length) {
+    log('info', 'cf-connecting-ip wordt vertrouwd van: ' + config.vertrouwdeProxies.join(', '));
+  }
   log('info', db.beschikbaar
     ? 'Database: ' + config.db.user + '@' + config.db.host + ':' + config.db.port + '/' + config.db.database
     : 'Geen database ingesteld, de site draait op demodata.');

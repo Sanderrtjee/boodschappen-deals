@@ -57,6 +57,19 @@ function bouwConfig() {
     // add-on-configuratie geeft een 401 die niet te zien is.
     importToken: String(optie('import_token') || process.env.IMPORT_TOKEN || '').trim(),
     demoAf: process.env.DEMO_MODE === '1',
+    // Adressen waarvan we cf-connecting-ip geloven (de cloudflared-container).
+    // Komma-gescheiden. Leeg betekent: nooit, dan telt het directe adres.
+    vertrouwdeProxies: String(optie('vertrouwde_proxies') || process.env.VERTROUWDE_PROXIES || '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+    // De import-endpoints zijn bedoeld voor n8n op het LAN. Via het publieke
+    // domein (Cloudflare) staan ze standaard dicht.
+    importPubliek: opties.import_publiek !== undefined
+      ? alsBoolean(opties.import_publiek)
+      : alsBoolean(process.env.IMPORT_PUBLIEK),
+    // Alleen voor tests: het adres dat als ingress-proxy geldt.
+    ingressIp: process.env.INGRESS_IP || undefined,
     // In de add-on is /data de vaste opslagmap. Draai je hem lokaal op Windows
     // of macOS, dan willen we geen map in de root van de schijf aanmaken.
     dataDir:
