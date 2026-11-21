@@ -1,0 +1,3074 @@
+[
+ {
+  "winkel": "ALDI",
+  "naam": "Aardappelschijfjes spek & ui",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Spruiten",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 750 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Gepaneerde varkensschnitzels 6 stuks",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Handperen Conference",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1 kg"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Mango",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1 st"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Beter Bikken Buddies",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Margarine",
+  "categorie": "NU of nooit",
+  "eenheid": "550 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Big Americans pizza",
+  "categorie": "NU of nooit",
+  "eenheid": "Prijsvoorbeeld: Big Americans Texas. Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Spruiten",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "750 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos luiers",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Weleda",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Mandarijnen 1 kilo",
+  "categorie": "Fruit, verse sappen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Therme body butters en foams",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Lucovitaal",
+  "categorie": "Etos acties",
+  "eenheid": "2 stuks"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos hand en body",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "King C. Gillette baardverzorging",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Schwarzkopf Uitgroeiset",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Alles in één groenten",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Cetaphil",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos wond en voetverzorging",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Dolce Gusto koffiecups",
+  "categorie": "NU of nooit",
+  "eenheid": "8-16 cups"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Santa Maria, La Morena en Knorr wraps",
+  "categorie": "Pasta, rijst, wereldkeuken",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Knorr Wereldgerechten en maaltijdmixen",
+  "categorie": "Pasta, rijst, wereldkeuken",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Sun vaatwascapsules en Finish",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Reus wasmiddelen t/m 23 wasbeurten en Fleuril t/m 54 wasbeurten",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos scheren en ontharen",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Wilkinson Intuition",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Bonduelle",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Faja Lobi",
+  "categorie": "Pasta, rijst, wereldkeuken",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Yum Yum en Indomie",
+  "categorie": "Soepen, sauzen, kruiden, olie",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Lucovitaal",
+  "categorie": "Gezondheid en sport",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Supradyn vitamines",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Davitamon",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Philips Sonicare opzetborstels",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "L'Oréal Paris, Maybelline en Rimmel make-up",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Nivea",
+  "categorie": "Drogisterij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle L'Oréal en Garnier",
+  "categorie": "Drogisterij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Guhl en Taft",
+  "categorie": "Drogisterij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Oral-B elektrisch poetsen",
+  "categorie": "Drogisterij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Libresse menstruatie ondergoed",
+  "categorie": "Drogisterij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Nalys keukenpapier",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle A-merk luchtverfrissers",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Page toiletpapier compleet schoon 40 rollen of gerecycled 32 rollen",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Goudse kaasplakken 48+",
+  "categorie": "Weekacties",
+  "eenheid": "250 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Gemengd gehakt gekruid",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Witlof 4 stuks",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Dr. Brown's baby verzorging",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Philips OneBlade navulmesjes",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Avocado",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1 st"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos leesbrillen, lenzenvloeistof en oogverzorging",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Rowenta Compact Power Cyclonic",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Snuggs menstruatieondergoed",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "EasyToys",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Biodermal en Remescar",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Witte en Sable druiven",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle John West, Fish Tales, Rio Mare en Princes tonijn single-packs",
+  "categorie": "Vis",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Gerookte slagersachterham van de versafdeling",
+  "categorie": "Vleeswaren",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Brie",
+  "categorie": "A-merken",
+  "eenheid": "200 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Rivella 1.5 literflessen 4-pack",
+  "categorie": "Frisdrank, sappen, water",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Roomkaas",
+  "categorie": "Borrelhapjes",
+  "eenheid": "185-200 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Mix of droge soep",
+  "categorie": "A-merken",
+  "eenheid": "45-87 g"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Chocoladeletters speciaal",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Kies & Mix Vers gesneden fruit",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "L'Oréal Paris Excellence haarkleuring",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Biologisch PLUS Rode bieten",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 500 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Hummus naturel",
+  "categorie": "Borrelhapjes",
+  "eenheid": "200 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Salademix",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "300 g"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Kruidnoten naturel",
+  "categorie": "Gratis bezorging",
+  "eenheid": "Per 500 g"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Handappels Jonagold",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1000 gram"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Gebraden gehakt",
+  "categorie": "Kaas en vleeswaren",
+  "eenheid": "150 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Eetrijpe avocado's",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "2 pack"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Hegen en Medela baby accessoires",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Jacob Hooy",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Elmex",
+  "categorie": "Drogisterij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Libresse",
+  "categorie": "Drogisterij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Duracell",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Extra grote kruimige aardappelen",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "3 kg"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kipgyros",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "400 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kaki fruit",
+  "categorie": "Aardappelen, groenten en fruit",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Optifit drinkyoghurt",
+  "categorie": "Weekacties",
+  "eenheid": "1 l"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Biologisch flespompoen of oranje pompoen",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Zoete kleine appeltjes zak 1 kilo",
+  "categorie": "Fruit, verse sappen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Drs. Leenarts",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Mini krieltjes",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "700 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Gerookte zalm",
+  "categorie": "Vis",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "XXL varkens- of kipschnitzel",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "250 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Weekenddeal Zuid-Afrika",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Opbakaardappels",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Flammkuchen- en bladerdeeg",
+  "categorie": "Verse maaltijden, gemak, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Wasa",
+  "categorie": "Ontbijtgranen, beleg",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle capsules voor Nespresso 10-36 stuks",
+  "categorie": "Koffie, thee",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Shared dining",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Blauwe bessen 150 gram",
+  "categorie": "Fruit, verse sappen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Hallmark hangpakjes kerst",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Speklappen",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "5 stuks, 400 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Mini-roomboterrozijnenbollen",
+  "categorie": "Brood, bakkerij en bakken",
+  "eenheid": "9 stuks"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Mandarijnen extra groot GVP",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1500 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle appels op schaal 4 stuks",
+  "categorie": "Fruit, verse sappen",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Biologisch PLUS Wortelen",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1 kg"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Vital Proteins",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Nasi-bamigroenten",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "450 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Goudse kaas van de versafdeling",
+  "categorie": "Kaas",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Campina yoghurt literpakken en kwark",
+  "categorie": "Zuivel, eieren",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Tapas roomkaasrolletjes",
+  "categorie": "Borrelhapjes",
+  "eenheid": "100 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Bolsius of Gouda rustieke kaarsen of theelichten",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle BiFi",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Mager rundergehakt 300 gram",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Loveline en Etos intiem",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Appels",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "6 stuks"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Blauwe bessen",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "300 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Thermacare Rugpijn",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Brabantse worstenbroodjes of hotdog",
+  "categorie": "Maaltijden, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent hertenbiefstuk",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Almhof",
+  "categorie": "Zuivel, eieren",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Cookies van de bakkerij",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Shishado, Badhu en Lekker Bekkie",
+  "categorie": "Pasta, rijst, wereldkeuken",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle T-Rex of El Yucateco",
+  "categorie": "Soepen, sauzen, kruiden, olie",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Senseo",
+  "categorie": "Koffie, thee",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Uit de keuken van PLUS Salade Kip Italiaanse stijl",
+  "categorie": "Verse maaltijden, gemak, salades",
+  "eenheid": "Per 445 g"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Ambachtelijke chocoladeletters",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Cocktailtomaten",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "IJsbergsla",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "Per krop"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Dermolin",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent hele vis",
+  "categorie": "Vis",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Daro en Dr.Swaab",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Philips Oneblade",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos gezichtsverzorging",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Worteltjes en snackworteltjes",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Curry ketchup",
+  "categorie": "Soepen, sauzen, kruiden en conserven",
+  "eenheid": "875 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Peper- of Elzasser cervelaat",
+  "categorie": "Kaas en vleeswaren",
+  "eenheid": "150 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Heineken, Brand, Birra Moretti of Desperados multipacks of kratten*",
+  "categorie": "Bier, wijn, aperitieven",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Excellent Selectie wijnen",
+  "categorie": "Bier, wijn, aperitieven",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Chouffe of Brouwerij 't IJ multipacks*",
+  "categorie": "Bier, wijn, aperitieven",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Affligem of Texels multipacks*",
+  "categorie": "Bier, wijn, aperitieven",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Concha y Toro of Wild Pig",
+  "categorie": "Bier, wijn, aperitieven",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Corona multipacks*",
+  "categorie": "Bier, wijn, aperitieven",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Oveja Negra Reserva",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Overige wijnaanbiedingen",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Adega de Pegões selected harvest rood of wit",
+  "categorie": "Weekacties",
+  "eenheid": "0.75 l"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Xtra ribbel chips",
+  "categorie": "Chips, noten en zoutjes",
+  "eenheid": "150 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Torres Viña Sol Bio",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Sarría Verdejo",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Tuc",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Milka koek",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Mora oven & airfryer snacks 2-8 stuks",
+  "categorie": "Diepvries",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Mucho Más Black Edition",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Riporta Primitivo Limited Edition",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alamos Velvet Malbec",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Bruce Jack",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Château Hautes Terres Bordeaux",
+  "categorie": "Gall & Gall klantenkaart",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Kies & Mix Snoepgroente",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Crunchy kruidnootjespasta",
+  "categorie": "Sintassortiment ",
+  "eenheid": "350 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Curanol",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Hero gezichtsverzorging",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Cervelaat",
+  "categorie": "Vleeswaren",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Estrid",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Strooisnoep",
+  "categorie": "Sintassortiment ",
+  "eenheid": "300 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Sinterklaas-crèmekoekjes",
+  "categorie": "Sintassortiment ",
+  "eenheid": "20 stuks, 175 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos lenzen",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos droge en gevoelige huid",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Choco-sintfiguren",
+  "categorie": "Sintassortiment ",
+  "eenheid": "120 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Verse rookworst",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos zonbescherming",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Spitskool",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Torres Natureo",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Zonin Amarone Della Valpolicella Cadeauverp",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Conica premium",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Pommery Brut Royal",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Seedlip",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Ironstone",
+  "categorie": "Gall & Gall klantenkaart",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Joseph Drouhin Bourgogne Chardonnay",
+  "categorie": "Gall & Gall klantenkaart",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Cune Rioja Reserva Cadeaupakket Houten Kist",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Ca'Marina Prosecco",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Pere Ventura Coleccion Privada Brut",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Doyenne du comice peren",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "1 kg"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Viña Salceda Rueda Verdejo",
+  "categorie": "Gall & Gall klantenkaart",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Ogio",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Valdivieso Estate Reserve Merlot",
+  "categorie": "Gall & Gall klantenkaart",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Biologisch knijpfruit",
+  "categorie": "Baby en kind",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Uit de keuken van PLUS Pizza Funghi",
+  "categorie": "Verse maaltijden, gemak, salades",
+  "eenheid": "Per 1 st"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Stoofvleesblokjes",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Louis Roederer Collection 246",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Schouderkarbonade 2 stuks",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Verspakket",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Stamppot 2-vaks",
+  "categorie": "Verse maaltijden, gemak, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Arrogant Frog Pinot Noir",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Whale's Tale Sauvignon Blanc",
+  "categorie": "Gall & Gall klantenkaart",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Uit de keuken van PLUS Spaghetti meatball",
+  "categorie": "Verse maaltijden, gemak, salades",
+  "eenheid": "Per 450 gram"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Kookgroenten",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS en Innocent Shots",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Colle del Principe Prosecco",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Pongrácz Brut",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Kies & Mix Oosterse maaltijd",
+  "categorie": "Verse maaltijden, gemak, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Dr. Loosen The Teetotaler Riesling",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Ijsbergsla",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Tijgerbalsem",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Hak witte bonen in tomatensaus 360 gram of sperziebonen 340 gram",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Vleeswaren van de versafdeling",
+  "categorie": "Vleeswaren",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Verspakket Griekse gehaktschotel, tomatensoep, lasagne of lemon chicken",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jumbo surimisticks",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Tonijn in pikante saus",
+  "categorie": "Weekacties",
+  "eenheid": "185 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Tonijn in zonnebloemolie",
+  "categorie": "Weekacties",
+  "eenheid": "145 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Spekknabbels",
+  "categorie": "Weekacties",
+  "eenheid": "75 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Dr. Loosen The Teetotaler Sparkling",
+  "categorie": "Gall & Gall acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Leverworst in plakjes van de versafdeling",
+  "categorie": "Vleeswaren",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Pim's of scholiertje",
+  "categorie": "NU of nooit",
+  "eenheid": "150 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Rookworst pittig of kip",
+  "categorie": "A-merken",
+  "eenheid": "275 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Dr. Oetker Casa di Mama salami",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Kipreepjes of flakes",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Hollandse Nieuwe haring",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "4 stuks, 240 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kipborrelhapjes gemarineerd",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Iglo vissticks",
+  "categorie": "Food",
+  "eenheid": "15 Stk."
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Hamburgers",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Zwagerman Gerookte spekreepjes",
+  "categorie": "Food",
+  "eenheid": "2 x 150 g"
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jumbo gemarineerde pangasiusfilet",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Prei",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1 st"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent kroketjes",
+  "categorie": "Diepvries",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Prei",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jumbo kipdijfiletblokjes",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Aardbei kruimelvlaaitje",
+  "categorie": "Food",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "PLUS Courgette groen",
+  "categorie": "Aardappelen, groente, fruit",
+  "eenheid": "Per 1 st"
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Appelsientje FruitDrink",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Alle Jumbo aardappelspecialiteiten",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Hutspot, zuurkool of stamppot aardappelen",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Mango",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Bleekselderij",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Avocado",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Fijne champignons",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Baby spinazie of spinazie",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Appelmoes, rode kool of sperziebonen",
+  "categorie": "A-merken",
+  "eenheid": "710 ml"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Gehakt cordon bleu",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Mini-fruitreepjes uitdeelzakjes",
+  "categorie": "NU of nooit",
+  "eenheid": "5 stuks, 150 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Half-om-half gehakt",
+  "categorie": "Food",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Mandarijnen",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Ananas zonder kroon",
+  "categorie": "Fruit, verse sappen",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Appel- of perensap",
+  "categorie": "Weekacties",
+  "eenheid": "1 l"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Roomboterappelflappen",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Olijven met kruiden of knoflook",
+  "categorie": "Weekacties",
+  "eenheid": "300 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Kaastwister",
+  "categorie": "Food",
+  "eenheid": "75 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Ananasstukjes 3-pack",
+  "categorie": "Weekacties",
+  "eenheid": "3x140 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Peper, vegan of boschampignonspaté",
+  "categorie": "Weekacties",
+  "eenheid": "125-150 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Roomijsbakjes 70 ml",
+  "categorie": "Diepvries",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jumbo tofu of tempeh naturel",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Braun Oorthermometer",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Fruitsalade",
+  "categorie": "Aardappelen, groenten en fruit",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Zalmfilet op huid",
+  "categorie": "Food",
+  "eenheid": "250 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Kabeljauwburgers",
+  "categorie": "Food",
+  "eenheid": "400 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Speklappen",
+  "categorie": "Food",
+  "eenheid": "600 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Roomboter amandelkoekjes",
+  "categorie": "Weekacties",
+  "eenheid": "100 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Hamlappen",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "8 stuks, 1 kg"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "High protein skyr",
+  "categorie": "A-merken",
+  "eenheid": "450 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Campina boter 200-250 gram",
+  "categorie": "Zuivel, eieren",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Calvé pindakaas 350 gram",
+  "categorie": "Ontbijtgranen, beleg",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Cordon bleu",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Alle Knorr maaltijdmixen",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Uit de keuken van PLUS Kies & Mix Shared dining",
+  "categorie": "Verse maaltijden, gemak, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Hamburgers classic",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Tijgerbroodje",
+  "categorie": "Food",
+  "eenheid": "63 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Wraps",
+  "categorie": "Weekacties",
+  "eenheid": "12 stuks, 744 g"
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Alle 1FRUIT",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Koffiebroodjes",
+  "categorie": "Food",
+  "eenheid": "100 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Choco met slagroom",
+  "categorie": "A-merken",
+  "eenheid": "180 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Groene thee",
+  "categorie": "Weekacties",
+  "eenheid": "20 zakjes"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Sneeuwbol met kerstfiguur",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Pepermunt",
+  "categorie": "A-merken",
+  "eenheid": "200 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Lange lucifers",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per set"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Boost",
+  "categorie": "NU of nooit",
+  "eenheid": "1.5 l"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Milk twist",
+  "categorie": "A-merken",
+  "eenheid": "400 ml"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Eru 100 gram",
+  "categorie": "Kaas",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Arla Protein gekoelde zuivel*",
+  "categorie": "Zuivel, eieren",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Optimel drinkyoghurt 330-500 ml",
+  "categorie": "Zuivel, eieren",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Halve vlaaien",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Heinz basistomatenproducten 130-520 gram",
+  "categorie": "Pasta, rijst, wereldkeuken",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Ben & Jerry's of Hertog mini-pints",
+  "categorie": "Diepvries",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Kleenex",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Rivella",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "HAK",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Conimex kroepoek",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Vifit",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Rode uien",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Conference peren",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Waspeen",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Minikrieltjes",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Westland slaatjes",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "JAN poffertjes",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Riblappen",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jumbo tijgerbollen of meergranen triangels",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jonagold appels",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Rundertartaartje",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Paté kleinverpakking",
+  "categorie": "Vleeswaren",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Mini Turks brood",
+  "categorie": "Weekacties",
+  "eenheid": "2 stuks, 200 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Saus",
+  "categorie": "A-merken",
+  "eenheid": "320 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Spaghetteria of risotteria",
+  "categorie": "NU of nooit",
+  "eenheid": "163-175 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Jumbone",
+  "categorie": "NU of nooit",
+  "eenheid": "1-4 stuks"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Glorix single-pack toiletblokken",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Volkoren bollen",
+  "categorie": "Food",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Dikke bleek",
+  "categorie": "Weekacties",
+  "eenheid": "2 l"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Volkoren sesambrood",
+  "categorie": "Weekacties",
+  "eenheid": "800 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Bakkersbrood Les Pains Bastille heel",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Bakkersbollen",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Maaza literpakken",
+  "categorie": "Frisdrank, sappen, water",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Frosties of coco pops repen",
+  "categorie": "NU of nooit",
+  "eenheid": "6 stuks, 120-150 g"
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jumbo Oosterse maaltijden",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Afwasmiddel",
+  "categorie": "A-merken",
+  "eenheid": "340 ml"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Verse sappen en smoothies 250 ml",
+  "categorie": "Fruit, verse sappen",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Sandwichspread",
+  "categorie": "A-merken",
+  "eenheid": "450 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "ProActiv of vloeibaar original",
+  "categorie": "A-merken",
+  "eenheid": "250 g/500 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Roerbaksaus",
+  "categorie": "NU of nooit",
+  "eenheid": "515-535 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Chiquita Ready to eat en Later lekker bananen",
+  "categorie": "Fruit, verse sappen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Crystal Clear en Rivella 1.5 literflessen",
+  "categorie": "Frisdrank, sappen, water",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Pastilles 3-pack",
+  "categorie": "NU of nooit",
+  "eenheid": "3x25 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Verse soepen 500 gram",
+  "categorie": "Maaltijden, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Hero B'tween multipacks",
+  "categorie": "Tussendoortjes",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Conference peren",
+  "categorie": "Food",
+  "eenheid": "1 kg"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Dots",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Jumbo verse soep",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Peijnenburg",
+  "categorie": "Ontbijtgranen, beleg",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Vloeibaar met olijfolie",
+  "categorie": "A-merken",
+  "eenheid": "500 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Rode puntpaprika's",
+  "categorie": "Aardappelen, groenten en fruit",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Gegrilde beenham",
+  "categorie": "NU of nooit",
+  "eenheid": "200 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Tochtstrip",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Hoestmelangemix",
+  "categorie": "Weekacties",
+  "eenheid": "250 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kersthanger huis",
+  "categorie": "Kerstaccessoires",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kersthangers in koker",
+  "categorie": "Kerstaccessoires",
+  "eenheid": "Per set"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Rijstbuiltje 2-pack",
+  "categorie": "NU of nooit",
+  "eenheid": "2x125 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Knaks",
+  "categorie": "NU of nooit",
+  "eenheid": "400 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Regular of zero",
+  "categorie": "A-merken",
+  "eenheid": "2 l"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Reiniger",
+  "categorie": "NU of nooit",
+  "eenheid": "0.5-1 l"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Creamy vanilla regular of 0%",
+  "categorie": "NU of nooit",
+  "eenheid": "1.5 l"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Mexicaanse roerbakgroenten 400 gram",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Slaverrijkers",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Rauwkost",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Beemster van de zelfbedieningsafdeling 125-150 gram",
+  "categorie": "Kaas",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Borrelkaasjes van de versafdeling",
+  "categorie": "Kaas",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Speltbroden heel",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Dr. Oetker Ristorante",
+  "categorie": "Diepvries",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Lipton Ice Tea 1.5 liter",
+  "categorie": "Frisdrank, sappen, water",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Vierkante donut",
+  "categorie": "Food",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Milbona Burrata",
+  "categorie": "Food",
+  "eenheid": "125 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Glorix flessen",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "LOTUS BISCOFF Donut",
+  "categorie": "Food",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Milka chocolade 87-100 gram",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Milbona Gouda oud stuk",
+  "categorie": "Food",
+  "eenheid": "450 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Solevita Smoothie bosvruchten",
+  "categorie": "Food",
+  "eenheid": "500 ml"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Douwe Egberts ijskoffie",
+  "categorie": "Zuivel, eieren",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Glutenvrije koekjes 45 gram",
+  "categorie": "Glutenvrij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Borrel kleintjes",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Gevulde pizza donut",
+  "categorie": "Food",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Alle Knorr Cup-A-Soup of Good Snacking",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Chio chips",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Ijsbergsla",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Ijsbergsla gemengd",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Snack- of geschrapte wortelen",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Snoep",
+  "categorie": "A-merken",
+  "eenheid": "180-185 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Etos gezichtsreiniging",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Fries Suikerbrood",
+  "categorie": "Food",
+  "eenheid": "700 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Zipzakjes",
+  "categorie": "Weekacties",
+  "eenheid": "75 stuks"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Bureaukalender",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Ontbijtgranen mini's",
+  "categorie": "Speciaal assortiment",
+  "eenheid": "230 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Chips",
+  "categorie": "NU of nooit",
+  "eenheid": "200 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Proteïne frisdrank zero",
+  "categorie": "A-merken",
+  "eenheid": "500 ml"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Unox Knaks",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Specialiteitenrasp",
+  "categorie": "Kaas",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Wonder Leaves",
+  "categorie": "Koffie, thee",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Zwagerman Yorkham",
+  "categorie": "Food",
+  "eenheid": "125 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "DR. OETKER Casa di Mama speciale",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Kersenpencee",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Frambozen",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Cheetos, Lay's Hamka's en Bugles 100-130 gram",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Croky*",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Chouffe Cherry",
+  "categorie": "NU of nooit",
+  "eenheid": "50 cl"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Ovenschotelmaaltijd",
+  "categorie": "Weekacties",
+  "eenheid": "400 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Hollandse Keuken 3-vaks-maaltijden",
+  "categorie": "Maaltijden, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Goudse plakken",
+  "categorie": "Kaas",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Harvest Basket Patat frites",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Wasverzachter",
+  "categorie": "NU of nooit",
+  "eenheid": "38 wasbeurten"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent room 250 gram",
+  "categorie": "Zuivel, eieren",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Koek",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Aftelkalender",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Duitse goulash",
+  "categorie": "Weekacties",
+  "eenheid": "800 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Hot wild berry",
+  "categorie": "Weekacties",
+  "eenheid": "0.75 l"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Veenlandsche kaas stuk 48+ belegen",
+  "categorie": "A-merken",
+  "eenheid": "800 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kerstboomrok",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Ledkaars",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk/set"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Aanmaakhoutwol",
+  "categorie": "Wonen",
+  "eenheid": "32 stuks"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Petit Patisserie banket",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Quaker Cruesli 375-450 gram",
+  "categorie": "Ontbijtgranen, beleg",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent apfelstrudel 600 gram",
+  "categorie": "Diepvries",
+  "eenheid": "Diepvries"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Teisseire siropen",
+  "categorie": "Frisdrank, sappen, water",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Chocolade-pretzels",
+  "categorie": "Weekacties",
+  "eenheid": "140 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Johma 175 gram",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Spreads & dips van de versafdeling",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Duyvis 175-275 gram",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Scrocchi, Picos en Borreltoast",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Klene 90-270 gram",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Germinimix",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Chocoladereep",
+  "categorie": "Weekacties",
+  "eenheid": "150 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Toiletblokken power 5-pack",
+  "categorie": "Weekacties",
+  "eenheid": "5x48 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Instant cappuccino",
+  "categorie": "Weekacties",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kattenvoer",
+  "categorie": "A-merken",
+  "eenheid": "85 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Markthal noten",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Mix voor chai of matcha latte",
+  "categorie": "NU of nooit",
+  "eenheid": "240 g"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Snoepgroente tomaat 500 gram",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Pureersoepen",
+  "categorie": "Maaltijden, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle M&M's en Maltesers 135-200 gram",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Grote speculaas pop",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Kruidnoten specials",
+  "categorie": "Koek, snoep, chocolade",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Mister Choc Party selection mini's",
+  "categorie": "Food",
+  "eenheid": "500 g"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Stoofperencake",
+  "categorie": "Food",
+  "eenheid": "350 g"
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Kip schnitzel, kip krokant schnitzel, kip saté schnitzel, kip cordon bleu, kip burger, kip donut of kip gehaktbal",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "0.0 bier",
+  "categorie": "A-merken",
+  "eenheid": "6x330 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Wasgel of shampoo",
+  "categorie": "A-merken",
+  "eenheid": "400 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Curryworsten",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "5 stuks, 900 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Magnum double ijs",
+  "categorie": "A-merken",
+  "eenheid": "3-6 stuks"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kistje bladmandarijnen",
+  "categorie": "Aardappels, groente en fruit",
+  "eenheid": "Per kist"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Wandkalender",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Pluizentondeuse",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Verse worsten",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "800 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Ledkerstfiguur",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Drop",
+  "categorie": "NU of nooit",
+  "eenheid": "1 kg"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- FR Merlot IGP d'OC trocken",
+  "categorie": "Food",
+  "eenheid": "750 ml"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Milbona Goudse oude kaas plakken",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Westland slaatjes voordeelverpakking",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Hot Wheels of Jurassic World speelgoed",
+  "categorie": "Sintassortiment ",
+  "eenheid": "Per stuk/set"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Floralys 3-laags keukenpapier",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "MILA'S WORLD Kattenbakvulling ultra XXL",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Seizoensfavoriet verspakketten",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Zuid- of Midden-Amerikaanse verspakketten",
+  "categorie": "Groente, aardappelen",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Uit Eigen Keuken maaltijden",
+  "categorie": "Maaltijden, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Verse pizza's",
+  "categorie": "Maaltijden, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Corona 0,0%",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Olijfolie extra vierge",
+  "categorie": "Weekacties",
+  "eenheid": "500 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Hygrometer",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Ledlichtgordijn",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Papieren kerstdecoratie",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk/set"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Bueno 8-pack",
+  "categorie": "NU of nooit",
+  "eenheid": "312-344 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Douchegel",
+  "categorie": "NU of nooit",
+  "eenheid": "720 ml"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle AH Verse pinsa's",
+  "categorie": "Maaltijden, salades",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Pietenhuis verrassings- en aftelkalender",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Bier",
+  "categorie": "Bier, mixdranken, aperitieven en likeuren",
+  "eenheid": "6x330 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Led Ijskristallamp",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk/set"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Vaatwastabletten classic",
+  "categorie": "Weekacties",
+  "eenheid": "100 tabs"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Chicken wings",
+  "categorie": "Weekacties",
+  "eenheid": "1 kg"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Bolletje",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Spa",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Alpro",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Dr. Oetker",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Aviko",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Scharrelkipkluifjes",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent mini feeststolletjes",
+  "categorie": "Bakkerij",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Kaneelbroodjes",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Adega de Pegões wit, rood en rosé",
+  "categorie": "Weekacties",
+  "eenheid": "0.75 l"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Ovenspecialiteiten",
+  "categorie": "Vlees",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "- Zigeunergehaktschnitzel",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alles voor je AH Winterdorp",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent bakaccessoires",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Winterdorp assortiment",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Versierde kerstbomen",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Sinterklaas accessoires",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent tafelversiering",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Hallmark kerstkaarten",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Pluche hangers",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Speciaalbier 4-/6-pack",
+  "categorie": "NU of nooit",
+  "eenheid": "4x0.5 l/6x330 ml"
+ },
+ {
+  "winkel": "PLUS",
+  "naam": "Celebrations, BeKind, Extra, Maltesers, M&M's, Trüfrü, Mars, Snickers, Twix, Bounty, Milkyway",
+  "categorie": "Gratis bezorging",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent popcorn 100 gram",
+  "categorie": "Borrel, chips, snacks",
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Alle Jumbo donuts",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "Jumbo",
+  "naam": "Douwe Egberts Aroma Rood of Decafé",
+  "categorie": null,
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Speciaalbier 4-pack",
+  "categorie": "NU of nooit",
+  "eenheid": "4x330 ml"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "3D-lichtster",
+  "categorie": "Kerstaccessoires",
+  "eenheid": "Per stuk/set"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "T-shirt",
+  "categorie": "Lotto kleding",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Vloeibaar wasmiddel",
+  "categorie": "Weekacties",
+  "eenheid": "80 wasbeurten"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "MILA'S WORLD Kattenbrokjes selectie in saus XXL 48-pack",
+  "categorie": "Food",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Led-daglichtlamp",
+  "categorie": "Kerstaccessoires",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Ledwandspots 2-pack",
+  "categorie": "Kerstaccessoires",
+  "eenheid": "2-pack"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Herten-medaillon",
+  "categorie": "Vlees, vis en vega",
+  "eenheid": "Ca. 300 g"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Dekbedovertrek velours",
+  "categorie": "Wonen",
+  "eenheid": "Per set"
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Picea conica of omorika",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Verzamelfiguur",
+  "categorie": "Sintassortiment ",
+  "eenheid": "Per stuk."
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Meubel-, tapijt- en autoreiniger",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Led kersttafereel",
+  "categorie": "Feestassortiment",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "HD-led projector 4K",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Bovenbouwrek",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Plafondlamp",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk."
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Luchtontvochtiger",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Sweatbroek",
+  "categorie": "Lotto kleding",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Sweatshirt",
+  "categorie": "Lotto kleding",
+  "eenheid": "Per stuk."
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Kunstkerstboom",
+  "categorie": "Kerstaccessoires",
+  "eenheid": "Per stuk."
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Doorables knuffel",
+  "categorie": "Sintassortiment ",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Sokken 12-pack",
+  "categorie": "Lotto kleding",
+  "eenheid": "Per set"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "KPop Demon Hunter",
+  "categorie": "Sintassortiment ",
+  "eenheid": null
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Koffiebonen Milano crema of Siciliano espresso",
+  "categorie": "Weekacties",
+  "eenheid": "1 kg"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Rvs kookpan",
+  "categorie": "NU of nooit",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Starterspakket of megapack stofwisdoekjes",
+  "categorie": "A-merken",
+  "eenheid": "Per stuk/72-pack"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Staande lamp",
+  "categorie": "Wonen",
+  "eenheid": "Per stuk"
+ },
+ {
+  "winkel": "ALDI",
+  "naam": "Tandpasta 5-pack",
+  "categorie": "NU of nooit",
+  "eenheid": "5x75 ml"
+ },
+ {
+  "winkel": "AH",
+  "naam": "Lipton Ice tea 1.5 literflessen 6-pack",
+  "categorie": "Frisdrank, sappen, water",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Omo wasmiddelen",
+  "categorie": "Huishouden",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Alle Nutrilon 800 gram 2 t/m 5*",
+  "categorie": "Baby en kind",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Tefal Easy Fry Dual XXL",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "SodaStream bruiswatertoestel Classic",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Rowenta steelstofzuiger X-Force 8.80",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Bourgini Kitchen Chef Elements",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Rowenta kruimelstofzuiger X-Touch",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Rowenta Instant Comfort Aqua",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Tefal Blend Up Essential",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Tefal Dolci Ice Cream Maker",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Tefal panini-grill",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Tefal Perfectmix+",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "AH Excellent hamster piek",
+  "categorie": "Koken, tafelen, vrije tijd",
+  "eenheid": null
+ },
+ {
+  "winkel": "AH",
+  "naam": "Zarqa gezichtscrèmes",
+  "categorie": "Etos acties",
+  "eenheid": null
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Primadonna Olijfolie extra vierge",
+  "categorie": "Food",
+  "eenheid": "1 l"
+ },
+ {
+  "winkel": "Lidl",
+  "naam": "Bellarom Koffie rood",
+  "categorie": "Food",
+  "eenheid": null
+ }
+]

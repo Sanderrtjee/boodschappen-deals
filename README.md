@@ -1,7 +1,7 @@
 # Boodschappen Deals
 
-Een zelf gehoste website die de weekaanbiedingen van Albert Heijn, Jumbo en Lidl
-op één plek zet en rangschikt op het profiel van de bezoeker. Iedereen die de
+Een zelf gehoste website die de weekaanbiedingen van Albert Heijn, Jumbo, Lidl,
+ALDI en PLUS op één plek zet en rangschikt op het profiel van de bezoeker. Iedereen die de
 link opent kiest zelf zijn winkels, dieet en huishoudgrootte, en ziet daar een
 eigen top van aanbiedingen bij. Alles in het Nederlands.
 
@@ -65,10 +65,19 @@ verschillende betekenissen, dus die worden eerst op één noemer gebracht:
 Zonder die stap zet je € 3,50 naast een doorgestreepte € 9,99, en dat klopt niet.
 Het zit in `bepaalPrijzen` in `lib/score.js`.
 
-**Kilo- en literprijs.** De eenheid (`500 g`, `2 x 200 g`, `6 x 33 cl`) wordt
-ontleed, zodat een grote zak niet automatisch als voordeliger telt. AH vult
+Bij bundels zijn de kolommen niet betrouwbaar: PLUS zet bij "3 voor 5.00" soms
+de bundelprijs in `prijs_nu` en soms de schapprijs van één stuk, en ALDI zet bij
+een kale "2 VOOR" de bundelprijs erin. Daarom rekent de site de stuksprijs uit het
+bedrag in het label (5,00 / 3). Zonder bedrag in het label wordt aangenomen dat
+`prijs_nu` de hele bundel is. Ook "50% korting op de 2e" (25 procent),
+"3 halen 2 betalen", een kale "1+1" en "2e voor 1 euro" worden herkend.
+
+**Kilo- en literprijs.** De eenheid (`500 g`, `2 x 200 g`, `6 x 33 cl`,
+`per kilo`) wordt ontleed, zodat een grote zak niet automatisch als voordeliger telt. AH vult
 `eenheid` meestal niet en zet de maat in de naam ("zak 500 gram"), dus als de
-kolom leeg is wordt de naam gelezen.
+kolom leeg is wordt de naam gelezen. `4 st` geeft geen kiloprijs. Het profiel
+"Gezin en voorraad" weegt de inhoud van de verpakking mee: 2 kilo of 3 liter telt
+als een groot pak.
 
 **Het actielabel als extra kortingsbron.** Een deel van de acties komt binnen als
 `deal_type = 'overig'` zonder kortingsfactor, terwijl in het label staat wat de
@@ -371,8 +380,11 @@ Buiten Home Assistant zijn s6 en bashio overbodig, dus compose gebruikt
 | Container start niet, onduidelijke shebang-fout | `run.sh` met CRLF. `.gitattributes` dwingt LF af; controleer met `git ls-files --eol boodschappen_deals/run.sh`. |
 
 Voor diepere diagnose: `GET /api/health` **met** je importtoken geeft de
-verbindingsgegevens, het aantal producten per winkel en de ingestuurde selecties
-terug. Zonder token blijft dat weg, want dat endpoint is publiek.
+verbindingsgegevens, de ruwe databasefout (`fout_detail`), het aantal producten
+per winkel en de ingestuurde selecties terug. Zonder token, of via het publieke
+domein, blijft dat weg. Zie `boodschappen_deals/DOCS.md` onder *Beveiliging*
+voor de limiet op foute tokens en waarom de import-endpoints via Cloudflare
+dichtstaan.
 
 ## Endpoints
 
@@ -386,6 +398,10 @@ terug. Zonder token blijft dat weg, want dat endpoint is publiek.
 | `DELETE /api/import/selectie/<sleutel>` | Zo'n selectie weghalen. Zelfde token. |
 | `POST /api/import/recepten` | Losse recepten opslaan. Zelfde token. |
 | `POST /api/verversen` | Cache leeggooien en direct opnieuw uit de database lezen. Zelfde token. |
+
+De import-endpoints en `/api/verversen` geven via het publieke domein een `404`,
+tenzij `import_publiek` aan staat. Na vijf foute tokens binnen een kwartier
+geeft een fout token een `429`; een geldig token werkt altijd.
 
 Parameters van `/api/deals`:
 
@@ -415,12 +431,13 @@ non-food. Voeg je er een toe, dan verschijnt hij automatisch in de profielkiezer
 kies een `icoon` uit `sparkles`, `dumbbell`, `leaf`, `wallet`, `users`, `clock`,
 `sprout`, `glass`, `cart` of `kok`.
 
-**Een winkel toevoegen.** De site is niet aan drie winkels gebonden. Zodra je
-n8n-flow een vierde winkel in `products.winkel` schrijft (Plus, Aldi, Dirk),
-verschijnt die automatisch als filter met het juiste aantal erbij. Wil je hem een
-eigen kleur geven, voeg die dan toe in `public/app.js` bij `WINKELKLEUREN` en in
-`styles.css` bij de `--plus` / `--aldi`-variabelen; voor Plus en Aldi staat dat er
-al in.
+**Een winkel toevoegen.** De site is niet aan een vast aantal winkels gebonden;
+live zijn het er vijf. Zodra je n8n-flow een nieuwe winkel in `products.winkel`
+schrijft (bijvoorbeeld Dirk), verschijnt die automatisch als filter met het
+juiste aantal erbij. Wil je hem een eigen kleur geven, voeg die dan toe in
+`public/app.js` bij `WINKELKLEUREN`, in `styles.css` als variabele en bij de
+`.winkelbadge[data-winkel=...]`-regels. Let op de spelling zoals hij in de data
+staat: `PLUS` en `ALDI` in hoofdletters.
 
 **De productclassificatie verbeteren.** `lib/classify.js` bevat woordgroepen en
 categoriehints. Zie je een product met een verkeerd label, dan is dat vrijwel
@@ -480,7 +497,6 @@ boodschappen-deals/
 ├── KOPPELEN.md                  de twee koppelingen met n8n, met controlestappen
 ├── n8n/README.md                wat je in de flow aanpast
 ├── n8n/SELECTIES.md             de twee Gemini-takken met prompts en nodes
-├── n8n/patch-workflow.js        script dat die wijzigingen toepast op een export
 ├── sql/schema.sql               tabellen, indexen, leesgebruiker
 ├── repository.yaml              zodat dit als add-on repository kan dienen
 ├── docker-compose.yml           alleen voor draaien buiten Home Assistant
@@ -489,8 +505,9 @@ boodschappen-deals/
 
 De aangepaste n8n-workflow staat bewust **niet** in de repo: die bevat de
 e-mailadressen van de ontvangers van de weekbrief. `n8n/workflow-*.json` staat
-daarom in `.gitignore`. Genereer hem uit je eigen export met
-`n8n/patch-workflow.js`.
+daarom in `.gitignore`. De bron van waarheid is de workflow in n8n zelf;
+exporteer die vóór elke wijziging. Het oude `n8n/patch-workflow.js` is
+verwijderd, omdat de live workflow er te ver van afweek.
 
 ## Beperkingen, eerlijk opgeschreven
 
@@ -498,9 +515,17 @@ daarom in `.gitignore`. Genereer hem uit je eigen export met
   meting. Wil je echte macro's, dan is een extra bron nodig, bijvoorbeeld de
   productdetail-API van AH per artikel. Dat is een flinke uitbreiding van de
   scrape.
-- **Dieetfilters zijn een schatting.** Ze werken op productnamen. Een pizza
-  margherita wordt niet als zuivelhoudend herkend, want er staat geen kaas in de
-  naam. Daarom staat die waarschuwing ook in de zijbalk van de site.
+- **Dieetfilters zijn een schatting, maar kiezen de veilige kant.** Ze werken op
+  de productnaam en de winkelcategorie (`lib/classify.js`). De dieetsignalen
+  staan los van de categorie in de UI: een "Salami snack" is snoep én vlees.
+  Samengestelde producten zonder vegetarisch label (maaltijden, pizza's, soepen,
+  "shared dining") tellen als onzeker en vallen buiten de dieetfilters op vlees.
+  Vlees waarvan de soort niet in de naam staat, telt als mogelijk varkensvlees.
+  Veganistisch weert ook snoep, koek en chocolade zonder vegan-label, want daar zit
+  vaak melk, ei of gelatine in. Een filter laat dus soms iets te veel weg, maar
+  hoort geen vlees door te laten. Jumbo (geen categorie) en Lidl (alleen "Food")
+  leunen volledig op de naam. Gelatine in snoep wordt bij vegetarisch niet herkend.
+  Daarom staat de waarschuwing ook in de zijbalk van de site.
 - **Jumbo levert geen prijzen.** De HTML-scrape haalt daar alleen actielabels op
   ("1+1 gratis"). Die producten hebben dus geen stuksprijs en kunnen niet op prijs
   of kiloprijs gesorteerd worden; ze tonen het label in plaats van een bedrag.

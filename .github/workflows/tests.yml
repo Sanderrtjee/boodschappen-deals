@@ -1,0 +1,25 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      # Dezelfde hoofdversie als het image (node:22.20-alpine3.21).
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntaxcontrole
+        run: npm run check
+      - name: Tests
+        run: npm test

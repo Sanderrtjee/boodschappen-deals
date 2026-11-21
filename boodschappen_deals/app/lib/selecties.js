@@ -3,6 +3,7 @@
 const fs = require('node:fs');
 const fsp = require('node:fs/promises');
 const path = require('node:path');
+const { schrijfAtomisch } = require('./bestand');
 
 // Selecties die door de assistent in n8n zijn samengesteld. Per profiel één
 // bestand. We bewaren alleen de keuze en de onderbouwing, niet de prijzen:
@@ -61,7 +62,7 @@ class Selecties {
       recepten: Array.isArray(invoer.recepten) ? invoer.recepten.slice(0, 12) : []
     };
 
-    await fsp.writeFile(this.bestand(invoer.sleutel), JSON.stringify(inhoud, null, 2), 'utf8');
+    await schrijfAtomisch(this.bestand(invoer.sleutel), JSON.stringify(inhoud, null, 2));
     return inhoud;
   }
 

@@ -10,7 +10,10 @@ const WINKELKLEUREN = {
   'Albert Heijn': 'var(--ah)',
   Jumbo: 'var(--jumbo)',
   Lidl: 'var(--lidl)',
+  // De data gebruikt hoofdletters; de oude spelling blijft voor de zekerheid.
+  PLUS: 'var(--plus)',
   Plus: 'var(--plus)',
+  ALDI: 'var(--aldi)',
   Aldi: 'var(--aldi)'
 };
 
@@ -178,15 +181,10 @@ function bouwProfielen() {
       '<span class="profiel-icoon"><svg><use href="#i-' + ontsnap(p.icoon || 'sparkles') + '"></use></svg></span>' +
       '<span class="profiel-tekst"><strong>' + ontsnap(p.naam) + '</strong>' +
       '<span>' + extra + '</span></span>';
-    b.addEventListener('click', () => {
-      staat.profiel = p.sleutel;
-      for (const k of houder.querySelectorAll('.profiel')) {
-        k.setAttribute('aria-checked', String(k.dataset.sleutel === p.sleutel));
-      }
-      opnieuw();
-    });
+    b.addEventListener('click', () => kiesProfiel(p.sleutel));
     houder.appendChild(b);
   }
+  profielTabindex();
 
   // Het gekozen profiel kan achteraan de rij staan, bijvoorbeeld uit een
   // gedeelde link. Schuif het dan in beeld, zonder animatie bij het laden.
@@ -199,6 +197,40 @@ function bouwProfielen() {
     }
   }
   profielRandBijwerken();
+}
+
+// Een bewuste keuze van de bezoeker. Alleen dan laten we de selectie van de
+// assistent bij een volgend bezoek los.
+function kiesProfiel(sleutel) {
+  staat.profiel = sleutel;
+  veiligSchrijf('bd_profiel_gekozen', true);
+  for (const k of el('profielen').querySelectorAll('.profiel')) {
+    k.setAttribute('aria-checked', String(k.dataset.sleutel === sleutel));
+  }
+  profielTabindex();
+  opnieuw();
+}
+
+// Een radiogroep is één tabstop: alleen de gekozen knop zit in de tabvolgorde,
+// met de pijltjestoetsen ga je binnen de groep.
+function profielTabindex() {
+  const knoppen = [...el('profielen').querySelectorAll('.profiel')];
+  const gekozen = knoppen.find((k) => k.getAttribute('aria-checked') === 'true') || knoppen[0];
+  for (const k of knoppen) k.tabIndex = k === gekozen ? 0 : -1;
+}
+
+function radioPijlen(houder, selector, kies) {
+  houder.addEventListener('keydown', (e) => {
+    const stap = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    if (!stap) return;
+    const knoppen = [...houder.querySelectorAll(selector)];
+    const i = knoppen.indexOf(document.activeElement);
+    if (i < 0) return;
+    e.preventDefault();
+    const volgende = knoppen[(i + stap + knoppen.length) % knoppen.length];
+    volgende.focus();
+    kies(volgende);
+  });
 }
 
 // Welke kant van de profielrij nog kaarten verbergt: bepaalt de zachte rand
@@ -225,6 +257,9 @@ function profielRijBedraden() {
   new ResizeObserver(profielRandBijwerken).observe(houder);
 }
 
+// De knoppen worden één keer gebouwd en daarna alleen bijgewerkt. Opnieuw
+// bouwen zou precies de knop vervangen die net is aangeklikt, en dan raakt
+// een toetsenbordgebruiker zijn plek kwijt.
 function bouwWinkels() {
   const houder = el('winkels');
   houder.innerHTML = '';
@@ -232,8 +267,7 @@ function bouwWinkels() {
     const b = document.createElement('button');
     b.className = 'pil';
     b.type = 'button';
-    const aan = staat.winkels.length === 0 || staat.winkels.includes(w.naam);
-    b.setAttribute('aria-pressed', String(aan));
+    b.dataset.winkel = w.naam;
     b.style.setProperty('--kleur', WINKELKLEUREN[w.naam] || 'var(--tekst-stil)');
     b.innerHTML = ontsnap(w.naam) + ' <small>' + w.aantal + '</small>';
     b.addEventListener('click', () => {
@@ -242,10 +276,18 @@ function bouwWinkels() {
       huidig = huidig.includes(w.naam) ? huidig.filter((n) => n !== w.naam) : [...huidig, w.naam];
       if (huidig.length === 0) huidig = metaData.winkels.map((x) => x.naam);
       staat.winkels = huidig.length === metaData.winkels.length ? [] : huidig;
-      bouwWinkels();
+      winkelsBijwerken();
       opnieuw();
     });
     houder.appendChild(b);
+  }
+  winkelsBijwerken();
+}
+
+function winkelsBijwerken() {
+  for (const b of el('winkels').querySelectorAll('.pil')) {
+    const aan = staat.winkels.length === 0 || staat.winkels.includes(b.dataset.winkel);
+    b.setAttribute('aria-pressed', String(aan));
   }
 }
 
@@ -305,11 +347,16 @@ function schuivenBijwerken() {
 }
 
 function segmentBijwerken() {
+  const zet = (b, aan) => {
+    b.classList.toggle('actief', aan);
+    b.setAttribute('aria-checked', String(aan));
+    b.tabIndex = aan ? 0 : -1;
+  };
   for (const b of el('huishouden').querySelectorAll('button')) {
-    b.classList.toggle('actief', Number(b.dataset.waarde) === staat.huishouden);
+    zet(b, Number(b.dataset.waarde) === staat.huishouden);
   }
   for (const b of el('winkelbezoek').querySelectorAll('button')) {
-    b.classList.toggle('actief', b.dataset.waarde === staat.winkelbezoek);
+    zet(b, b.dataset.waarde === staat.winkelbezoek);
   }
 }
 
@@ -399,7 +446,9 @@ function kaartHtml(d) {
     '<div class="kaart-beeld">' + beeld + '</div>' +
     '<div class="kaart-hoofd">' +
     '<div class="kaart-winkelrij">' +
-    '<span class="winkelbadge" style="--kleur:' + (WINKELKLEUREN[d.winkel] || 'var(--tekst-stil)') + '">' +
+    // Geen style-attribuut: de CSP staat geen inline stijlen toe. De kleur
+    // komt uit styles.css op basis van data-winkel.
+    '<span class="winkelbadge" data-winkel="' + ontsnap(d.winkel) + '">' +
     ontsnap(d.winkel) + '</span>' +
     (d.label ? '<span class="dealbadge">' + ontsnap(d.label) + '</span>' : '') +
     '</div>' +
@@ -412,7 +461,7 @@ function kaartHtml(d) {
     '<div class="kaart-voet">' +
     '<span class="meta">' + [geldig, d.alleen_in_winkel ? 'alleen in de winkel' : ''].filter(Boolean).join(' · ') + '</span>' +
     (d.link ? '<a class="knop knop-plat" href="' + ontsnap(d.link) + '" target="_blank" rel="noopener noreferrer" title="Bekijk bij ' + ontsnap(d.winkel) + '"><svg><use href="#i-extern"></use></svg></a>' : '') +
-    '<button class="knop ' + (inLijst ? 'knop-primair' : 'knop-rand') + ' toevoeg" data-id="' + d.id + '">' +
+    '<button type="button" class="knop ' + (inLijst ? 'knop-primair' : 'knop-rand') + ' toevoeg" data-id="' + d.id + '" aria-pressed="' + inLijst + '" aria-label="' + ontsnap(d.naam) + ' op mijn lijst">' +
     '<svg><use href="#i-' + (inLijst ? 'check' : 'plus') + '"></use></svg>' +
     (inLijst ? 'Op lijst' : 'Lijst') +
     '</button>' +
@@ -428,8 +477,25 @@ function kaartenPlaatsen(items, aanvullen) {
     houder.innerHTML = '';
     dealsPerId.clear();
   }
-  for (const d of items) dealsPerId.set(d.id, d);
-  houder.insertAdjacentHTML('beforeend', items.map(kaartHtml).join(''));
+  // Bij aanvullen nooit een kaart die er al staat nog eens toevoegen.
+  const nieuw = aanvullen ? items.filter((d) => !dealsPerId.has(d.id)) : items;
+  for (const d of nieuw) dealsPerId.set(d.id, d);
+  houder.insertAdjacentHTML('beforeend', nieuw.map(kaartHtml).join(''));
+}
+
+// Alleen de lijststand van een kaart bijwerken, in plaats van de hele kaart
+// te vervangen. Zo blijft de focus op de knop waar je net op drukte.
+function kaartLijstStand(id) {
+  const kaart = document.querySelector('.kaart[data-id="' + id + '"]');
+  if (!kaart) return;
+  const inLijst = lijst.some((x) => x.id === id);
+  kaart.classList.toggle('in-lijst', inLijst);
+  const knop = kaart.querySelector('.toevoeg');
+  if (!knop) return;
+  knop.classList.toggle('knop-primair', inLijst);
+  knop.classList.toggle('knop-rand', !inLijst);
+  knop.setAttribute('aria-pressed', String(inLijst));
+  knop.innerHTML = '<svg><use href="#i-' + (inLijst ? 'check' : 'plus') + '"></use></svg>' + (inLijst ? 'Op lijst' : 'Lijst');
 }
 
 // ---------------------------------------------------------------------------
@@ -461,8 +527,10 @@ function legeStaatTekst() {
     el('leegReset').classList.add('verborgen');
   } else {
     el('leegTitel').textContent = 'Niets gevonden';
-    el('leegUitleg').textContent =
-      'Deze combinatie van filters levert geen aanbiedingen op. Probeer een winkel bij te zetten of de minimale korting te verlagen.';
+    // Een oude zoekterm is de meest verraderlijke oorzaak, dus die noemen we.
+    el('leegUitleg').textContent = staat.q
+      ? 'Er staat nog een zoekterm aan: "' + staat.q + '". Samen met je andere filters levert dat niets op.'
+      : 'Deze combinatie van filters levert geen aanbiedingen op. Laat de filters los om alles binnen dit profiel te zien.';
     el('leegReset').classList.remove('verborgen');
   }
 }
@@ -473,7 +541,9 @@ function opnieuw(vertraagd) {
   getoond = 0;
   urlBijwerken();
   filterAantalBijwerken();
-  veiligSchrijf('bd_filters', staat);
+  // De zoekterm bewaren we niet: een vergeten "chocola" van vorige week gaf
+  // anders 0 aanbiedingen zonder dat duidelijk was waarom.
+  veiligSchrijf('bd_filters', { ...staat, q: '' });
   clearTimeout(ophaalTimer);
   ophaalTimer = setTimeout(() => haalDeals(false), vertraagd ? 260 : 0);
 }
@@ -497,12 +567,12 @@ async function haalDeals(aanvullen) {
   getoond += data.items.length;
   kaartenPlaatsen(data.items, aanvullen);
 
+  // Eerst de selectie bijwerken, dan pas de lege staat: die leest hem.
+  laatsteSelectie = data.selectie || null;
   el('leeg').classList.toggle('verborgen', data.totaal > 0);
   if (data.totaal === 0) legeStaatTekst();
   el('meerKnop').classList.toggle('verborgen', getoond >= data.totaal);
   el('meerKnop').textContent = 'Nog ' + (data.totaal - getoond) + ' aanbiedingen laden';
-
-  laatsteSelectie = data.selectie || null;
 
   const s = data.samenvatting;
   const delen = [];
@@ -539,6 +609,7 @@ async function haalDeals(aanvullen) {
 
 async function haalMeta() {
   const res = await fetch(api('meta'));
+  if (!res.ok) throw new Error('Server antwoordde met ' + res.status);
   metaData = await res.json();
 
   document.title = metaData.site_titel + ' — supermarktaanbiedingen op maat';
@@ -650,11 +721,7 @@ function lijstWissel(id) {
     });
   }
   lijstBewaren();
-
-  // Alleen de betreffende kaart opnieuw tekenen.
-  const kaart = document.querySelector('.kaart[data-id="' + id + '"]');
-  const d = dealsPerId.get(id);
-  if (kaart && d) kaart.outerHTML = kaartHtml(d);
+  kaartLijstStand(id);
 }
 
 function lijstTekenen() {
@@ -736,15 +803,41 @@ async function naarKlembord(tekst, melding) {
 // Bedrading
 // ---------------------------------------------------------------------------
 
+// Bij openen gaat de focus naar de sluitknop, bij sluiten terug naar de knop
+// waarmee het paneel geopend werd.
 function lade(open) {
+  const wasOpen = !el('lade').classList.contains('verborgen');
   el('lade').classList.toggle('verborgen', !open);
   el('overlay').classList.toggle('verborgen', !open);
+  el('lijstKnop').setAttribute('aria-expanded', String(open));
+  if (open && !wasOpen) el('ladeSluit').focus();
+  if (!open && wasOpen) el('lijstKnop').focus();
 }
 
 function zijbalk(open) {
+  const wasOpen = el('zijbalk').classList.contains('open');
   el('zijbalk').classList.toggle('open', open);
+  el('filterKnop').setAttribute('aria-expanded', String(open));
   if (window.matchMedia('(max-width: 900px)').matches) {
     el('overlay').classList.toggle('verborgen', !open);
+    if (open && !wasOpen) el('zijbalkSluit').focus();
+    if (!open && wasOpen) el('filterKnop').focus();
+  }
+}
+
+// Tab binnen de open lade houden.
+function houdFocusInLade(e) {
+  if (e.key !== 'Tab' || el('lade').classList.contains('verborgen')) return;
+  const focusbaar = [...el('lade').querySelectorAll('button, a[href]')].filter((x) => !x.disabled);
+  if (!focusbaar.length) return;
+  const eerste = focusbaar[0];
+  const laatste = focusbaar[focusbaar.length - 1];
+  if (e.shiftKey && document.activeElement === eerste) {
+    e.preventDefault();
+    laatste.focus();
+  } else if (!e.shiftKey && document.activeElement === laatste) {
+    e.preventDefault();
+    eerste.focus();
   }
 }
 
@@ -786,9 +879,10 @@ function bedraad() {
     const id = Number(knop.dataset.verwijder);
     lijst = lijst.filter((x) => x.id !== id);
     lijstBewaren();
-    const kaart = document.querySelector('.kaart[data-id="' + id + '"]');
-    const d = dealsPerId.get(id);
-    if (kaart && d) kaart.outerHTML = kaartHtml(d);
+    kaartLijstStand(id);
+    // De knop is weg; zet de focus op iets logisch in plaats van op <body>.
+    const volgende = el('ladeInhoud').querySelector('[data-verwijder]') || el('ladeSluit');
+    volgende.focus();
   });
 
   el('lijstKnop').addEventListener('click', () => lade(true));
@@ -805,12 +899,10 @@ function bedraad() {
     naarKlembord(lijstAlsTekst(), 'Lijst gekopieerd');
   });
   el('ladeLeeg').addEventListener('click', () => {
+    const waren = lijst.map((x) => x.id);
     lijst = [];
     lijstBewaren();
-    document.querySelectorAll('.kaart.in-lijst').forEach((k) => {
-      const d = dealsPerId.get(Number(k.dataset.id));
-      if (d) k.outerHTML = kaartHtml(d);
-    });
+    waren.forEach(kaartLijstStand);
   });
 
   el('deelKnop').addEventListener('click', () => {
@@ -844,21 +936,27 @@ function bedraad() {
     opnieuw();
   });
 
-  el('huishouden').addEventListener('click', (e) => {
-    const b = e.target.closest('button');
-    if (!b) return;
+  const kiesHuishouden = (b) => {
     staat.huishouden = Number(b.dataset.waarde);
     segmentBijwerken();
     opnieuw();
-  });
-
-  el('winkelbezoek').addEventListener('click', (e) => {
-    const b = e.target.closest('button');
-    if (!b) return;
+  };
+  const kiesWinkelbezoek = (b) => {
     staat.winkelbezoek = b.dataset.waarde;
     segmentBijwerken();
     opnieuw();
+  };
+  el('huishouden').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (b) kiesHuishouden(b);
   });
+  el('winkelbezoek').addEventListener('click', (e) => {
+    const b = e.target.closest('button');
+    if (b) kiesWinkelbezoek(b);
+  });
+  radioPijlen(el('huishouden'), 'button', kiesHuishouden);
+  radioPijlen(el('winkelbezoek'), 'button', kiesWinkelbezoek);
+  radioPijlen(el('profielen'), '.profiel', (b) => kiesProfiel(b.dataset.sleutel));
 
   el('maxPrijs').addEventListener('input', (e) => {
     staat.max_prijs = parseFloat(e.target.value) || 0;
@@ -880,10 +978,24 @@ function bedraad() {
     opnieuw();
   });
 
-  el('meerKnop').addEventListener('click', () => haalDeals(true));
+  // Een dubbele klik mag niet twee keer dezelfde pagina ophalen.
+  let meerBezig = false;
+  el('meerKnop').addEventListener('click', async () => {
+    if (meerBezig) return;
+    meerBezig = true;
+    el('meerKnop').disabled = true;
+    try {
+      await haalDeals(true);
+    } finally {
+      meerBezig = false;
+      el('meerKnop').disabled = false;
+    }
+  });
 
   const herstel = () => {
     staat = { ...STANDAARD };
+    // Alles terug naar af, dus ook de selectie van de assistent weer als start.
+    veiligSchrijf('bd_profiel_gekozen', false);
     el('zoek').value = '';
     el('zoekWis').classList.add('verborgen');
     el('sorteer').value = staat.sort;
@@ -898,12 +1010,33 @@ function bedraad() {
     opnieuw();
   };
   el('resetKnop').addEventListener('click', herstel);
-  el('leegReset').addEventListener('click', herstel);
+
+  // Filters loslaten houdt het profiel, het dieet en de huishoudgrootte vast:
+  // die zeggen iets over de bezoeker, de rest over deze ene zoektocht.
+  el('leegReset').addEventListener('click', () => {
+    staat = {
+      ...STANDAARD,
+      profiel: staat.profiel,
+      dieet: staat.dieet,
+      huishouden: staat.huishouden,
+      sort: staat.sort
+    };
+    el('zoek').value = '';
+    el('zoekWis').classList.add('verborgen');
+    el('alleenKorting').checked = false;
+    el('toonNonfood').checked = false;
+    winkelsBijwerken();
+    bouwCategorieen();
+    schuivenBijwerken();
+    segmentBijwerken();
+    opnieuw();
+  });
 
   el('tabAanbiedingen').addEventListener('click', () => tab('aanbiedingen'));
   el('tabRecepten').addEventListener('click', () => tab('recepten'));
 
   document.addEventListener('keydown', (e) => {
+    houdFocusInLade(e);
     if (e.key === 'Escape') {
       lade(false);
       zijbalk(false);
@@ -936,10 +1069,13 @@ async function start() {
   // Heeft de bezoeker zelf nog niets gekozen, dan is de selectie van de
   // assistent het startpunt. Dat is de curatie waar het om begonnen is; de
   // regelprofielen zijn de terugval als er nog geen selectie ingestuurd is.
+  // Let op: de opgeslagen filters bevatten altijd een profiel, ook als de
+  // bezoeker er nooit een koos. Daarom een eigen vlag voor een bewuste keuze.
   const profielIsGekozen = Boolean(
     (uitUrl && new URLSearchParams(location.search).get('profiel')) ||
-      (opgeslagen && opgeslagen.profiel)
+      veiligLees('bd_profiel_gekozen') === true
   );
+  if (!uitUrl) staat.q = '';
 
   el('zoek').value = staat.q;
   el('zoekWis').classList.toggle('verborgen', !staat.q);
